@@ -34,7 +34,7 @@ namespace OrangeHRMTest.Tests
             await loginPage.Login("admin", "admin123", expectSuccess: true);
             // Check if the dashboard is visible
             bool isDashboardVisible = await loginPage.IsDashboardVisible();
-            Assert.IsTrue(isDashboardVisible, "Dashboard heading not found");
+            Assert.IsTrue(isDashboardVisible, "Expected 'Dashboard' heading was not found");
 
         }
 
