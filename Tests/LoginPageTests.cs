@@ -1,10 +1,8 @@
-using OrangeHRMTests;
-
 namespace OrangeHRMTest.Tests
 {
     [TestClass]
 
-    public class BaseLoginTests
+    public class LoginPageTests
     {
         private IPlaywright? _playwright;
         private IBrowser? _browser;
@@ -35,7 +33,6 @@ namespace OrangeHRMTest.Tests
             // Check if the dashboard is visible
             bool isDashboardVisible = await loginPage.IsDashboardVisible();
             Assert.IsTrue(isDashboardVisible, "Expected 'Dashboard' heading was not found");
-
         }
 
         [TestMethod]
