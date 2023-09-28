@@ -1,4 +1,4 @@
-﻿namespace OrangeHRMTests
+﻿namespace OrangeHRMTest.Pages
 {
 
     public class DashboardPage
