@@ -41,7 +41,7 @@
             await _navigationPanelPage.GoToAdminPageAsync();
 
             var adminHeaderText = await _page.InnerTextAsync(NavigationPanelPage.AdminHeaderSelector);
-            Console.WriteLine($"Actual Directory Header Text: {adminHeaderText}");
+            Console.WriteLine($"Actual Admin Header Text: {adminHeaderText}");
 
             bool isAdminHeaderVisible = await _navigationPanelPage.IsAdminHeaderVisibleAsync();
             Assert.IsTrue(isAdminHeaderVisible, "The Admin header is not visible.");
@@ -73,7 +73,7 @@
             await _navigationPanelPage.GoToLeavePageAsync();
 
             var leaveHeaderText = await _page.InnerTextAsync(NavigationPanelPage.LeaveHeaderSelector);
-            Console.WriteLine($"Actual Directory Header Text: {leaveHeaderText}");
+            Console.WriteLine($"Actual Leave Header Text: {leaveHeaderText}");
 
             bool isLeaveHeaderVisible = await _navigationPanelPage.IsLeaveHeaderVisibleAsync();
             Assert.IsTrue(isLeaveHeaderVisible, "The Leave header is not visible.");
