@@ -47,123 +47,14 @@
             _page = page;
         }
 
-        // Admin Element Methods
-        public async Task GoToAdminPageAsync()
+        public async Task GoToPageAsync(string elementSelector)
         {
-            await _page.ClickAsync(AdminSelector);
-        }
-        public async Task<bool> IsAdminHeaderVisibleAsync()
-        {
-            return await _page.IsVisibleAsync(AdminHeaderSelector);
-        }
-        // PIM Element Methods
-        public async Task GoToPIMPageAsync()
-        {
-            await _page.ClickAsync(PIMSelector);
-        }
-        public async Task<bool> IsPIMHeaderVisibleAsync()
-        {
-            return await _page.IsVisibleAsync(PIMHeaderSelector);
+            await _page.ClickAsync(elementSelector);
         }
 
-        // Leave Element Methods
-        public async Task GoToLeavePageAsync()
+        public async Task<bool> IsHeaderVisibleAsync(string elementHeaderSelector)
         {
-            await _page.ClickAsync(LeaveSelector);
-        }
-        public async Task<bool> IsLeaveHeaderVisibleAsync()
-        {
-            return await _page.IsVisibleAsync(LeaveHeaderSelector);
-        }
-
-        // Time Element Methods
-        public async Task GoToTimePageAsync()
-        {
-            await _page.ClickAsync(TimeSelector);
-        }
-        public async Task<bool> IsTimeHeaderVisibleAsync()
-        {
-            return await _page.IsVisibleAsync(TimeHeaderSelector);
-        }
-
-        // Recruitment Element Methods
-        public async Task GoToRecruitmentPageAsync()
-        {
-            await _page.ClickAsync(RecruitmentSelector);
-        }
-        public async Task<bool> IsRecruitmentHeaderVisibleAsync()
-        {
-            return await _page.IsVisibleAsync(RecruitmentHeaderSelector);
-        }
-
-        // My Info Element Methods
-        public async Task GoToMyInfoPageAsync()
-        {
-            await _page.ClickAsync(MyInfoSelector);
-        }
-        public async Task<bool> IsMyInfoHeaderVisibleAsync()
-        {
-            return await _page.IsVisibleAsync(MyInfoHeaderSelector);
-        }
-
-        // My Info Element Methods
-        public async Task GoToPerformancePageAsync()
-        {
-            await _page.ClickAsync(PerformanceSelector);
-        }
-        public async Task<bool> IsPerformanceHeaderVisibleAsync()
-        {
-            return await _page.IsVisibleAsync(PerformanceHeaderSelector);
-        }
-
-        // Dashboard Element Methods
-        public async Task GoToDashboardPageAsync()
-        {
-            await _page.ClickAsync(DashboardSelector);
-        }
-        public async Task<bool> IsDashboardHeaderVisibleAsync()
-        {
-            return await _page.IsVisibleAsync(DashboardHeaderSelector);
-        }
-
-        // Directory Element Methods
-        public async Task GoToDirectoryPageAsync()
-        {
-            await _page.ClickAsync(DirectorySelector);
-        }
-        public async Task<bool> IsDirectoryHeaderVisibleAsync()
-        {
-            return await _page.IsVisibleAsync(DirectoryHeaderSelector);
-        }
-
-        // Maintenance Element Methods
-        public async Task GoToMaintenancePageAsync()
-        {
-            await _page.ClickAsync(MaintenanceSelector);
-        }
-        public async Task<bool> IsMaintenanceHeaderVisibleAsync()
-        {
-            return await _page.IsVisibleAsync(MaintenanceHeaderSelector);
-        }
-
-        // Claim Element Methods
-        public async Task GoToClaimPageAsync()
-        {
-            await _page.ClickAsync(ClaimSelector);
-        }
-        public async Task<bool> IsClaimHeaderVisibleAsync()
-        {
-            return await _page.IsVisibleAsync(ClaimHeaderSelector);
-        }
-
-        // Buzz Element Methods
-        public async Task GoToBuzzPageAsync()
-        {
-            await _page.ClickAsync(BuzzSelector);
-        }
-        public async Task<bool> IsBuzzHeaderVisibleAsync()
-        {
-            return await _page.IsVisibleAsync(BuzzHeaderSelector);
+            return await _page.IsVisibleAsync(elementHeaderSelector);
         }
     }
 }
