@@ -57,5 +57,32 @@
             bool isHeaderVisible = await _navigationPanelPage.IsHeaderVisibleAsync(headerSelector);
             Assert.IsTrue(isHeaderVisible, $"The header is not visible for element: {elementSelector}");
         }
+
+        [TestMethod]
+        [TestCategory("PositiveTest")]
+        [TestCategory("Navigation")]
+        [DataRow("Admin"      )]
+        [DataRow("PIM"        )]
+        [DataRow("Leave"      )]
+        [DataRow("Time"       )]
+        [DataRow("Recruitment")]
+        [DataRow("My Info"    )]
+        [DataRow("Performance")]
+        [DataRow("Dashboard"  )]
+        [DataRow("Directory"  )]
+        [DataRow("Maintenance")]
+        [DataRow("Claim"      )]
+        [DataRow("Buzz"       )]
+        public async Task TestPageHeaderIsVisibleDict(string screen)
+        {
+            _navigationPanelPage = new NavigationPanelPage(_page);
+            await _navigationPanelPage.GoToPageAsyncDict(screen);
+
+            var headerText = await _page.InnerTextAsync(NavigationPanelPage.getHeaderSelector(screen));
+            Console.WriteLine($"Actual Header Text: {headerText}");
+
+            bool isHeaderVisible = await _navigationPanelPage.IsHeaderVisibleAsyncDict(screen);
+            Assert.IsTrue(isHeaderVisible, $"The header is not visible for element: {screen}");
+        }
     }
 }

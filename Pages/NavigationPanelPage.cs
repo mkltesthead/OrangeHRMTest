@@ -5,7 +5,6 @@
         private readonly IPage _page;
 
         // Define Selectors for the elements in the navigation panel
-
         public const string AdminSelector = "text=Admin";
         public const string AdminHeaderSelector = "h6.oxd-text:has-text('Admin')";
 
@@ -47,14 +46,59 @@
             _page = page;
         }
 
-        public async Task GoToPageAsync(string elementSelector)
+        public async Task GoToPageAsync(string screen)
         {
-            await _page.ClickAsync(elementSelector);
+            await _page.ClickAsync(screen);
         }
 
-        public async Task<bool> IsHeaderVisibleAsync(string elementHeaderSelector)
+        public async Task<bool> IsHeaderVisibleAsync(string screen)
         {
-            return await _page.IsVisibleAsync(elementHeaderSelector);
+            return await _page.IsVisibleAsync(screen);
+        }
+
+
+
+
+
+        public static Dictionary<string, string> screens = new Dictionary<string, string>() {
+            {"Admin"      , ""                    },
+            {"PIM"        , ""                    },
+            {"Leave"      , ""                    },
+            {"Time"       , ""                    },
+            {"Recruitment", ""                    },
+            {"My Info"    , "PIM"                 },
+            {"Performance", ""                    },
+            {"Dashboard"  , ""                    },
+            {"Directory"  , ""                    },
+            {"Maintenance", "Administrator Access"},
+            {"Claim"      , ""                    },
+            {"Buzz"       , ""                    }
+        };
+
+        public static string getScreenSelector(string screen)
+        {
+            if (screens.ContainsKey(screen))
+                return $"text={screen}";
+            else
+                return "";
+        }
+
+        public static string getHeaderSelector(string screen)
+        {
+            if (screens.ContainsKey(screen))
+                return $"h6.oxd-text:has-text('{(screens[screen] == "" ? screen : screens[screen])}')";
+            else
+                return "";
+        }
+
+        public async Task GoToPageAsyncDict(string screen)
+        {
+            await _page.ClickAsync(getScreenSelector(screen));
+        }
+
+        public async Task<bool> IsHeaderVisibleAsyncDict(string screen)
+        {
+            return await _page.IsVisibleAsync(getHeaderSelector(screen));
         }
     }
 }
