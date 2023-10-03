@@ -49,12 +49,12 @@
         public async Task TestPageHeaderIsVisibleDict(string screen)
         {
             _navigationPanelPage = new NavigationPanelPage(_page);
-            await _navigationPanelPage.GoToPageAsyncDict(screen);
+            await _navigationPanelPage.GoToPageAsync(screen);
 
             var headerText = await _page.InnerTextAsync(NavigationPanelPage.getHeaderSelector(screen));
             Console.WriteLine($"Actual Header Text: {headerText}");
 
-            bool isHeaderVisible = await _navigationPanelPage.IsHeaderVisibleAsyncDict(screen);
+            bool isHeaderVisible = await _navigationPanelPage.IsHeaderVisibleAsync(screen);
             Assert.IsTrue(isHeaderVisible, $"The header is not visible for element: {screen}");
         }
     }

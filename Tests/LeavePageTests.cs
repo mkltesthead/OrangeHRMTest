@@ -1,15 +1,14 @@
 ﻿namespace OrangeHRMTest.Tests
 {
     [TestClass]
-    public class PIMPageTests
+    public class LeavePageTests
     {
         private IBrowser? _browser;
         private IBrowserContext? _context;
         private IPage? _page;
         private LoginPage? _loginPage; // POM created for Login Page
         private NavigationPanelPage? _navigationPanelPage; // POM created for the NavigationPanel
-        private PIMPage? _PIMPage; // POM created for the PIM Page
-
+        private LeavePage? _LeavePage; // POM created for the PIM Page
         [TestInitialize]
         public async Task Setup()
         {
@@ -34,28 +33,29 @@
 
         [TestMethod]
         [TestCategory("PositiveTest")]
-        [TestCategory("PIM Page Elements")]
-        [DataRow("Employee List")]
-        [DataRow("Add Employee")]
-        [DataRow("Reports")]
+        [TestCategory("Admin Page Elements")]
+        [DataRow("Apply")]
+        [DataRow("My Leave")]
+        [DataRow("Leave List")]
+        [DataRow("Assign Leave")]
 
         public async Task TestElementPageVisible(string element)
         {
             _navigationPanelPage = new NavigationPanelPage(_page);
-            await _navigationPanelPage.GoToPageAsync("PIM");
+            await _navigationPanelPage.GoToPageAsync("Leave");
 
             // Create a PIMPage object
-            _PIMPage = new PIMPage(_page);
+            _LeavePage = new LeavePage(_page);
 
             // Navigate to the element page
-            await _PIMPage.GoToElementPageAsync(element);
+            await _LeavePage.GoToElementPageAsync(element);
 
             // Get the text on the element page header
-            var headerText = await _PIMPage.GetElementPageHeaderText(element);
+            var headerText = await _LeavePage.GetElementPageHeaderText(element);
             Console.WriteLine($"Actual Header Text: {headerText}");
 
             // Perform verifications or interactions on the element page
-            bool isElementPageVisible = await _PIMPage.IsElementPageVisibleAsync(element);
+            bool isElementPageVisible = await _LeavePage.IsElementPageVisibleAsync(element);
             Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
         }
     }
