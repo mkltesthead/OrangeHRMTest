@@ -35,12 +35,12 @@
             return screens.ContainsKey(screen) ? $"h6.oxd-text:has-text('{(screens[screen] == "" ? screen : screens[screen])}')" : "";
         }
 
-        public async Task GoToPageAsyncDict(string screen)
+        public async Task GoToPageAsync(string screen)
         {
             await _page.ClickAsync(getScreenSelector(screen));
         }
 
-        public async Task<bool> IsHeaderVisibleAsyncDict(string screen)
+        public async Task<bool> IsHeaderVisibleAsync(string screen)
         {
             return await _page.IsVisibleAsync(getHeaderSelector(screen));
         }

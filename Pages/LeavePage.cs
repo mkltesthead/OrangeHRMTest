@@ -1,18 +1,19 @@
 ﻿namespace OrangeHRMTest.Pages
 {
-    public class PIMPage
+    public class LeavePage
     {
         private readonly IPage _page;
 
-        public PIMPage(IPage page)
+        public LeavePage(IPage page)
         {
             _page = page;
         }
 
         public static Dictionary<string, string> elements = new Dictionary<string, string>() {
-            {"Employee List", ""},
-            {"Add Employee" , ""},
-            {"Reports"      , ""}
+            {"Apply"       , ""},
+            {"My Leave"    , ""},
+            {"Leave List"  , ""},
+            {"Assign Leave", ""}
         };
 
         public static string getElementSelector(string element)
