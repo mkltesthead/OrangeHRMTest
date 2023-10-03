@@ -9,6 +9,7 @@
         private LoginPage? _loginPage; // POM created for Login Page
         private NavigationPanelPage? _navigationPanelPage; // POM created for the NavigationPanel
         private PIMPage? _PIMPage; // POM created for the PIM Page
+
         [TestInitialize]
         public async Task Setup()
         {
