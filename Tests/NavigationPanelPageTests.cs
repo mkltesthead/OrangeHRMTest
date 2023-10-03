@@ -34,45 +34,18 @@
         [TestMethod]
         [TestCategory("PositiveTest")]
         [TestCategory("Navigation")]
-        [DataRow(NavigationPanelPage.AdminSelector, NavigationPanelPage.AdminHeaderSelector)]
-        [DataRow(NavigationPanelPage.PIMSelector, NavigationPanelPage.PIMHeaderSelector)]
-        [DataRow(NavigationPanelPage.LeaveSelector, NavigationPanelPage.LeaveHeaderSelector)]
-        [DataRow(NavigationPanelPage.TimeSelector, NavigationPanelPage.TimeHeaderSelector)]
-        [DataRow(NavigationPanelPage.RecruitmentSelector, NavigationPanelPage.RecruitmentHeaderSelector)]
-        [DataRow(NavigationPanelPage.MyInfoSelector, NavigationPanelPage.MyInfoHeaderSelector)]
-        [DataRow(NavigationPanelPage.PerformanceSelector, NavigationPanelPage.PerformanceHeaderSelector)]
-        [DataRow(NavigationPanelPage.DashboardSelector, NavigationPanelPage.DashboardHeaderSelector)]
-        [DataRow(NavigationPanelPage.DirectorySelector, NavigationPanelPage.DirectoryHeaderSelector)]
-        [DataRow(NavigationPanelPage.MaintenanceSelector, NavigationPanelPage.MaintenanceHeaderSelector)]
-        [DataRow(NavigationPanelPage.ClaimSelector, NavigationPanelPage.ClaimHeaderSelector)]
-        [DataRow(NavigationPanelPage.BuzzSelector, NavigationPanelPage.BuzzHeaderSelector)]
-        public async Task TestPageHeaderIsVisible(string elementSelector, string headerSelector)
-        {
-            _navigationPanelPage = new NavigationPanelPage(_page);
-            await _navigationPanelPage.GoToPageAsync(elementSelector);
-
-            var headerText = await _page.InnerTextAsync(headerSelector);
-            Console.WriteLine($"Actual Header Text: {headerText}");
-
-            bool isHeaderVisible = await _navigationPanelPage.IsHeaderVisibleAsync(headerSelector);
-            Assert.IsTrue(isHeaderVisible, $"The header is not visible for element: {elementSelector}");
-        }
-
-        [TestMethod]
-        [TestCategory("PositiveTest")]
-        [TestCategory("Navigation")]
-        [DataRow("Admin"      )]
-        [DataRow("PIM"        )]
-        [DataRow("Leave"      )]
-        [DataRow("Time"       )]
+        [DataRow("Admin")]
+        [DataRow("PIM")]
+        [DataRow("Leave")]
+        [DataRow("Time")]
         [DataRow("Recruitment")]
-        [DataRow("My Info"    )]
+        [DataRow("My Info")]
         [DataRow("Performance")]
-        [DataRow("Dashboard"  )]
-        [DataRow("Directory"  )]
+        [DataRow("Dashboard")]
+        [DataRow("Directory")]
         [DataRow("Maintenance")]
-        [DataRow("Claim"      )]
-        [DataRow("Buzz"       )]
+        [DataRow("Claim")]
+        [DataRow("Buzz")]
         public async Task TestPageHeaderIsVisibleDict(string screen)
         {
             _navigationPanelPage = new NavigationPanelPage(_page);
