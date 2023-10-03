@@ -31,6 +31,7 @@
             await _browser.CloseAsync();
         }
 
+        /*
         [TestMethod]
         [TestCategory("PositiveTest")]
         [TestCategory("PIM Page Elements")]
@@ -101,6 +102,34 @@
             // Perform verifications or interactions on the Employee List page
             bool isReportsPageVisible = await _PIMPage.IsReportsPageVisibleAsync();
             Assert.IsTrue(isReportsPageVisible, "The Reports page is not visible.");
+        }
+        */
+
+        [TestMethod]
+        [TestCategory("PositiveTest")]
+        [TestCategory("PIM Page Elements")]
+        [DataRow("Employee List")]
+        [DataRow("Add Employee")]
+        [DataRow("Reports")]
+
+        public async Task TestElementPageVisible(string element)
+        {
+            _navigationPanelPage = new NavigationPanelPage(_page);
+            await _navigationPanelPage.GoToPageAsyncDict("PIM");
+
+            // Create a PIMPage object
+            _PIMPage = new PIMPage(_page);
+
+            // Navigate to the element page
+            await _PIMPage.GoToElementPageAsync(element);
+
+            // Get the text on the element page header
+            var headerText = await _PIMPage.GetElementPageHeaderText(element);
+            Console.WriteLine($"Actual Header Text: {headerText}");
+
+            // Perform verifications or interactions on the element page
+            bool isElementPageVisible = await _PIMPage.IsElementPageVisibleAsync(element);
+            Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
         }
     }
 }
