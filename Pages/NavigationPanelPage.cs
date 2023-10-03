@@ -27,18 +27,12 @@
 
         public static string getScreenSelector(string screen)
         {
-            if (screens.ContainsKey(screen))
-                return $"text={screen}";
-            else
-                return "";
+            return screens.ContainsKey(screen) ? $"text={screen}" : "";
         }
 
         public static string getHeaderSelector(string screen)
         {
-            if (screens.ContainsKey(screen))
-                return $"h6.oxd-text:has-text('{(screens[screen] == "" ? screen : screens[screen])}')";
-            else
-                return "";
+            return screens.ContainsKey(screen) ? $"h6.oxd-text:has-text('{(screens[screen] == "" ? screen : screens[screen])}')" : "";
         }
 
         public async Task GoToPageAsyncDict(string screen)
