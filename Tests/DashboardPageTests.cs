@@ -1,6 +1,4 @@
-﻿using OrangeHRMTests;
-
-namespace OrangeHRMTest.Tests
+﻿namespace OrangeHRMTest.Tests
 {
     [TestClass]
     public class DashboardPageTests
