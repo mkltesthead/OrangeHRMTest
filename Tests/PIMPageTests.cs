@@ -41,7 +41,7 @@
         public async Task TestElementPageVisible(string element)
         {
             _navigationPanelPage = new NavigationPanelPage(_page);
-            await _navigationPanelPage.GoToPageAsyncDict("PIM");
+            await _navigationPanelPage.GoToPageAsync("PIM");
 
             // Create a PIMPage object
             _PIMPage = new PIMPage(_page);
