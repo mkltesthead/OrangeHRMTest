@@ -108,7 +108,7 @@
                         // Get the text on the element page header
                         var headerText = await _AdminPage.GetSublementPageHeaderText(element, subelement);
                         Console.WriteLine($"Actual Header Text: {headerText}");
-                        string expected = AdminPage.elements[element][subelement] == "" ? subelement : AdminPage.elements[element][subelement];
+                        string expected = AdminPage.elements[element][subelement][1] == "" ? subelement : AdminPage.elements[element][subelement][1];
                         Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found.");
 
                         // Perform verifications or interactions on the element page

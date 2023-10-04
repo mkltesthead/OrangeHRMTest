@@ -9,60 +9,38 @@
             _page = page;
         }
 
-        /*
-        public static Dictionary<string, string[][]> elements = new Dictionary<string, string[][]>() {
-            {"User Management"   , new string[][]{ new string[] { "Users", "System Users" } } },
-            {"Job"               , new string[][]{ new string[] { "Job Titles" },
-                                                   new string[] { "Pay Grades" },
-                                                   new string[] { "Employment Status" },
-                                                   new string[] { "Job Categories" },
-                                                   new string[] { "Work Shifts" } } },
-            {"Organization"      , new string[][]{ new string[] { "General Information" },
-                                                   new string[] { "Locations" },
-                                                   new string[] { "Structure", "Organization Structure" } } },
-            {"Qualifications"    , new string[][]{ new string[] { "Skills" },
-                                                   new string[] { "Education" },
-                                                   new string[] { "Licenses" },
-                                                   new string[] { "Languages" },
-                                                   new string[] { "Memberships" } } },
-            {"Nationalities"     , new string[][]{ } },
-            {"Corporate Branding", new string[][]{ } },
-            {"Configuration"     , new string[][]{ new string[] { "Email Configuration" },
-                                                   new string[] { "Email Subscriptions" },
-                                                   new string[] { "Localization" },
-                                                   new string[] { "Language Packages" },
-                                                   new string[] { "Modules", "Module Configuration" },
-                                                   new string[] { "Social Media Authentication", "Launching Soon" },
-                                                   new string[] { "Register OAuth Client", "OAuth Client List" },
-                                                   new string[] { "LDAP Configuration" } } }
-        };
-        */
-
-        public static Dictionary<string, Dictionary<string, string>> elements = new Dictionary<string, Dictionary<string, string>>() {
-            {"User Management "  , new Dictionary<string, string>{ { "Users", "System Users" } } },
-            {"Job "              , new Dictionary<string, string>{ { "Job Titles", "" },
-                                                                   { "Pay Grades", "" },
-                                                                   { "Employment Status", "" },
-                                                                   { "Job Categories", "" },
-                                                                   { "Work Shifts", "" } } },
-            {"Organization "     , new Dictionary<string, string>{ { "General Information", "" },
-                                                                   { "Locations", "" },
-                                                                   { "Structure", "Organization Structure" } } },
-            {"Qualifications "   , new Dictionary<string, string>{ { "Skills", "" },
-                                                                   { "Education", "" },
-                                                                   { "Licenses", "" },
-                                                                   { "Languages", "" },
-                                                                   { "Memberships", "" } } },
-            {"Nationalities"     , new Dictionary<string, string>{ } },
-            {"Corporate Branding", new Dictionary<string, string>{ } },
-            {"Configuration "    , new Dictionary<string, string>{ { "Email Configuration", "" },
-                                                                   { "Email Subscriptions", "" },
-                                                                   { "Localization", "" },
-                                                                   { "Language Packages", "" },
-                                                                   { "Modules", "Module Configuration" },
-                                                                   { "Social Media Authentication", "Launching Soon" },
-                                                                   { "Register OAuth Client", "OAuth Client List" },
-                                                                   { "LDAP Configuration", "" } } }
+        // The keys of this dictionary are all the options across the top of the page
+        // If the control isn't a dropdown then the corresponding value is an empty dictionary
+        // If the control is a drop down then the corresponding value is a second dictionary
+        // The keys of the second dictionary are the drop down options
+        // The corresponding values of the second dictionary are arrays containing 2 strings 0) the type of heading 1) the heading text
+        // If the type of heading is "" then "h6" is used
+        // If the heading text is "" then the key is used
+        public static Dictionary<string, Dictionary<string, string[]>> elements = new Dictionary<string, Dictionary<string, string[]>>() {
+            {"User Management "  , new Dictionary<string, string[]>{ { "Users", new string[] { "h5", "System Users" } } } },
+            {"Job "              , new Dictionary<string, string[]>{ { "Job Titles", new string[] { "", "" } },
+                                                                     { "Pay Grades", new string[] { "", "" } },
+                                                                     { "Employment Status", new string[] { "", "" } },
+                                                                     { "Job Categories", new string[] { "", "" } },
+                                                                     { "Work Shifts", new string[] { "", "" } } } },
+            {"Organization "     , new Dictionary<string, string[]>{ { "General Information", new string[] { "", "" } },
+                                                                     { "Locations", new string[] { "h5", "" } },
+                                                                     { "Structure", new string[] { "", "Organization Structure" } } } },
+            {"Qualifications "   , new Dictionary<string, string[]>{ { "Skills", new string[] { "", "" } },
+                                                                     { "Education", new string[] { "", "" } },
+                                                                     { "Licenses", new string[] { "", "" } },
+                                                                     { "Languages", new string[] { "", "" } },
+                                                                     { "Memberships", new string[] { "", "" } } } },
+            {"Nationalities"     , new Dictionary<string, string[]>{ } },
+            {"Corporate Branding", new Dictionary<string, string[]>{ } },
+            {"Configuration "    , new Dictionary<string, string[]>{ { "Email Configuration", new string[] { "p", "" } },
+                                                                     { "Email Subscriptions", new string[] { "", "" } },
+                                                                     { "Localization", new string[] { "", "" } },
+                                                                     { "Language Packages", new string[] { "", "" } },
+                                                                     { "Modules", new string[] { "", "Module Configuration" } },
+                                                                     { "Social Media Authentication", new string[] { "h4", "Launching Soon" } },
+                                                                     { "Register OAuth Client", new string[   ] { "", "OAuth Client List" } },
+                                                                     { "LDAP Configuration", new string[] { "", "" } } } }
         };
 
         public static string getElementSelector(string element)
@@ -76,21 +54,8 @@
         }
 
         public static string getSubelementHeaderSelector(string element, string subelement)
-        {
-            string header = "h6";
-            if ((element == "User Management " && subelement == "Users") || (element == "Organization " && subelement == "Locations"))
-            {
-                header = "h5";
-            }
-            else if ((element == "Configuration " && subelement == "Email Configuration"))
-            {
-                header = "p";
-            }
-            else if ((element == "Configuration " && subelement == "Social Media Authentication"))
-            {
-                header = "h4";
-            }
-            return (elements.ContainsKey(element) && elements[element].ContainsKey(subelement)) ? $"{header}.oxd-text:has-text('{(elements[element][subelement] == "" ? subelement : elements[element][subelement])}')" : "";
+        { 
+            return (elements.ContainsKey(element) && elements[element].ContainsKey(subelement)) ? $"{(elements[element][subelement][0] == "" ? "h6" : elements[element][subelement][0])}.oxd-text:has-text('{(elements[element][subelement][1] == "" ? subelement : elements[element][subelement][1])}')" : "";
         }
 
         // Methods to interact with elements on the page
