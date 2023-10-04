@@ -56,5 +56,71 @@
             bool isElementPageVisible = await _AdminPage.IsElementPageVisibleAsync(element);
             Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
         }
+
+        [TestMethod]
+        [TestCategory("PositiveTest")]
+        [TestCategory("Admin Page Elements")]
+        [DataRow("User Management ")]
+        [DataRow("Job ")]
+        [DataRow("Organization ")]
+        [DataRow("Qualifications ")]
+        [DataRow("Nationalities")]
+        [DataRow("Corporate Branding")]
+        [DataRow("Configuration ")]
+
+        public async Task TestElementPageVisible2(string element)
+        {
+            _navigationPanelPage = new NavigationPanelPage(_page);
+            await _navigationPanelPage.GoToPageAsync("Admin");
+
+            // Create a PIMPage object
+            _AdminPage = new AdminPage(_page);
+
+            if (AdminPage.elements.ContainsKey(element))
+            {
+                if (AdminPage.elements[element].Count == 0)
+                {
+                    // Navigate to the element page
+                    await _AdminPage.GoToElementPageAsync(element);
+
+                    // Get the text on the element page header
+                    var headerText = await _AdminPage.GetElementPageHeaderText(element);
+                    Console.WriteLine($"Actual Header Text: {headerText}");
+                    Assert.AreEqual(element, headerText, false, $"The header {element} was not found.");
+
+                    // Perform verifications or interactions on the element page
+                    bool isElementPageVisible = await _AdminPage.IsElementPageVisibleAsync(element);
+                    Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
+                }
+                else
+                {
+                    Console.WriteLine($"The element {element} has multiple choices.");
+                    foreach (string subelement in AdminPage.elements[element].Keys)
+                    {
+                        Console.WriteLine($"The sub-element is {subelement}.");
+
+                        // Navigate to the element page
+                        await _AdminPage.GoToElementPageAsync(element);
+
+                        // Navigate to the sub-element
+                        await _AdminPage.GoToSubelementPageAsync(element, subelement);
+
+                        // Get the text on the element page header
+                        var headerText = await _AdminPage.GetSublementPageHeaderText(element, subelement);
+                        Console.WriteLine($"Actual Header Text: {headerText}");
+                        string expected = AdminPage.elements[element][subelement] == "" ? subelement : AdminPage.elements[element][subelement];
+                        Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found.");
+
+                        // Perform verifications or interactions on the element page
+                        bool isElementPageVisible = await _AdminPage.IsElementPageVisibleAsync(element);
+                        Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"The element {element} does not exist on the Admin page.");
+            }
+        }
     }
 }
