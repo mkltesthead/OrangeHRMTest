@@ -1,10 +1,10 @@
-﻿namespace OrangeHRMTest.Pages.PIM
+﻿namespace OrangeHRMTest.Pages
 {
-    public class PIMPage
+    public class PerformancePage
     {
         private readonly IPage _page;
 
-        public PIMPage(IPage page)
+        public PerformancePage(IPage page)
         {
             _page = page;
         }
@@ -19,14 +19,13 @@
         // If the type of heading is "" then "h6" is used
         // If the heading text is "" then the key is used
         public static Dictionary<string, object> elements = new Dictionary<string, object>() {
-            {"Configuration ", new Dictionary<string, string[]>{ { "Optional Fields", new string[] { "p", "" } },
-                                                                 { "Custom Fields", new string[] { "", "" } },
-                                                                 { "Data Import", new string[] { "p", "" } },
-                                                                 { "Reporting Methods", new string[] { "p", "" } },
-                                                                 { "Termination Reasons", new string[] { "p", "" } } } },
-            {"Employee List" , new string[] { "h5", "Employee Information" } },
-            {"Add Employee"  , new string[] { "", "" } },
-            {"Reports"       , new string[] { "h5", "Employee Reports" } }
+            {"Configure "       , new Dictionary<string, string[]>{ { "KPIs", new string[] { "h5", "Key Performance Indicators for Job Title" } },
+                                                                    { "Trackers", new string[] { "h5", "Performance Trackers" } } } },
+            {"Manage Reviews "  , new Dictionary<string, string[]>{ { "Manage Reviews", new string[] { "h5", "Manage Performance Reviews" } },
+                                                                    { "My Reviews", new string[] { "", "" } },
+                                                                    { "Employee Reviews", new string[] { "h5", "" } } } },
+            {"My Trackers"      , new string[] { "", "My Performance Trackers" } },
+            {"Employee Trackers", new string[] { "h5", "Employee Performance Trackers" } }
         };
 
         public static string getElementSelector(string element)
@@ -39,7 +38,7 @@
             string returnValue = "";
             if (elements.ContainsKey(element) && elements[element] is not Array)
             {
-                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)elements[element];
+                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>) elements[element];
                 returnValue = subelements.ContainsKey(subelement) ? $"a[class='oxd-topbar-body-nav-tab-link']:text('{subelement}')" : "";
             }
             return returnValue;
@@ -50,7 +49,7 @@
             string returnValue = "";
             if (elements.ContainsKey(element) && elements[element] is not Array)
             {
-                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)elements[element];
+                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>) elements[element];
                 if (subelements.ContainsKey(subelement))
                 {
                     string[] details = subelements[subelement];

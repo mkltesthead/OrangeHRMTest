@@ -1,4 +1,6 @@
-﻿namespace OrangeHRMTest.Tests
+﻿using OrangeHRMTest.Pages;
+
+namespace OrangeHRMTest.Tests
 {
     [TestClass]
     public class PIMPageTests
@@ -15,7 +17,16 @@
         {
             // Initialize browser, context, and page
             var playwright = await Playwright.CreateAsync();
-            _browser = await playwright.Chromium.LaunchAsync();
+
+            bool demo = false;
+            BrowserTypeLaunchOptions options = new BrowserTypeLaunchOptions();
+            if (demo)
+            {
+                options.Headless = false;
+                options.SlowMo = 1000;
+            }
+            _browser = await playwright.Chromium.LaunchAsync(options);
+
             _context = await _browser.NewContextAsync();
             _page = await _context.NewPageAsync();
 
@@ -57,6 +68,70 @@
             // Perform verifications or interactions on the element page
             bool isElementPageVisible = await _PIMPage.IsElementPageVisibleAsync(element);
             Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
+        }
+
+        [TestMethod]
+        [TestCategory("PositiveTest")]
+        [TestCategory("PIM Page Elements")]
+        [DataRow("Configuration ")]
+        [DataRow("Employee List")]
+        [DataRow("Add Employee")]
+        [DataRow("Reports")]
+
+        public async Task TestElementPageVisible2(string element)
+        {
+            _navigationPanelPage = new NavigationPanelPage(_page);
+            await _navigationPanelPage.GoToPageAsync("PIM");
+
+            // Create a PIMPage object
+            _PIMPage = new PIMPage(_page);
+
+            if (AdminPage.elements.ContainsKey(element))
+            {
+                if (AdminPage.elements[element] is Array)
+                {
+                    // Navigate to the element page
+                    await _PIMPage.GoToElementPageAsync(element);
+
+                    // Get the text on the element page header
+                    var headerText = await _PIMPage.GetElementPageHeaderText(element);
+                    Console.WriteLine($"Actual Header Text: {headerText}");
+                    Assert.AreEqual(element, headerText, false, $"The header {element} was not found.");
+
+                    // Perform verifications or interactions on the element page
+                    bool isElementPageVisible = await _PIMPage.IsElementPageVisibleAsync(element);
+                    Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
+                }
+                else
+                {
+                    Console.WriteLine($"The element {element} has multiple choices.");
+                    Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)PIMPage.elements[element];
+                    foreach (string subelement in subelements.Keys)
+                    {
+                        Console.WriteLine($"The sub-element is {subelement}.");
+
+                        // Navigate to the element page
+                        await _PIMPage.GoToElementPageAsync(element);
+
+                        // Navigate to the sub-element
+                        await _PIMPage.GoToSubelementPageAsync(element, subelement);
+
+                        // Get the text on the element page header
+                        var headerText = await _PIMPage.GetSublementPageHeaderText(element, subelement);
+                        Console.WriteLine($"Actual Header Text: {headerText}");
+                        string expected = subelements[subelement][1] == "" ? subelement : subelements[subelement][1];
+                        Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found.");
+
+                        // Perform verifications or interactions on the element page
+                        bool isElementPageVisible = await _PIMPage.IsElementPageVisibleAsync(element);
+                        Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"The element {element} does not exist on the Admin page.");
+            }
         }
     }
 }

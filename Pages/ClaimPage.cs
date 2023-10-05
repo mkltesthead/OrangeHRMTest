@@ -1,10 +1,10 @@
-﻿namespace OrangeHRMTest.Pages.PIM
+﻿namespace OrangeHRMTest.Pages
 {
-    public class PIMPage
+    public class ClaimPage
     {
         private readonly IPage _page;
 
-        public PIMPage(IPage page)
+        public ClaimPage(IPage page)
         {
             _page = page;
         }
@@ -19,14 +19,12 @@
         // If the type of heading is "" then "h6" is used
         // If the heading text is "" then the key is used
         public static Dictionary<string, object> elements = new Dictionary<string, object>() {
-            {"Configuration ", new Dictionary<string, string[]>{ { "Optional Fields", new string[] { "p", "" } },
-                                                                 { "Custom Fields", new string[] { "", "" } },
-                                                                 { "Data Import", new string[] { "p", "" } },
-                                                                 { "Reporting Methods", new string[] { "p", "" } },
-                                                                 { "Termination Reasons", new string[] { "p", "" } } } },
-            {"Employee List" , new string[] { "h5", "Employee Information" } },
-            {"Add Employee"  , new string[] { "", "" } },
-            {"Reports"       , new string[] { "h5", "Employee Reports" } }
+            {"Configuration " , new Dictionary<string, string[]>{ { "Events", new string[] { "h5", "" } },
+                                                                  { "Expense Types", new string[] { "h5", "" } } } },
+            {"Submit Claim"   , new string[] { "", "Create Claim Request" } },
+            {"My Claims"      , new string[] { "h5", "" } },
+            {"Employee Claims", new string[] { "h5", "" } },
+            {"Assign Claim"   , new string[] { "", "Create Claim Request" } }
         };
 
         public static string getElementSelector(string element)
@@ -39,7 +37,7 @@
             string returnValue = "";
             if (elements.ContainsKey(element) && elements[element] is not Array)
             {
-                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)elements[element];
+                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>) elements[element];
                 returnValue = subelements.ContainsKey(subelement) ? $"a[class='oxd-topbar-body-nav-tab-link']:text('{subelement}')" : "";
             }
             return returnValue;
@@ -50,7 +48,7 @@
             string returnValue = "";
             if (elements.ContainsKey(element) && elements[element] is not Array)
             {
-                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)elements[element];
+                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>) elements[element];
                 if (subelements.ContainsKey(subelement))
                 {
                     string[] details = subelements[subelement];

@@ -3,14 +3,14 @@
 namespace OrangeHRMTest.Tests
 {
     [TestClass]
-    public class LeavePageTests
+    public class ClaimPageTests
     {
         private IBrowser? _browser;
         private IBrowserContext? _context;
         private IPage? _page;
         private LoginPage? _loginPage; // POM created for Login Page
         private NavigationPanelPage? _navigationPanelPage; // POM created for the NavigationPanel
-        private LeavePage? _LeavePage; // POM created for the Leave Page
+        private ClaimPage? _ClaimPage; // POM created for the Claim Page
         [TestInitialize]
         public async Task Setup()
         {
@@ -44,89 +44,87 @@ namespace OrangeHRMTest.Tests
 
         [TestMethod]
         [TestCategory("PositiveTest")]
-        [TestCategory("Leave Page Elements")]
-        [DataRow("Apply")]
-        [DataRow("My Leave")]
-        [DataRow("Leave List")]
-        [DataRow("Assign Leave")]
+        [TestCategory("Claim Page Elements")]
+        [DataRow("Submit Claim")]
+        [DataRow("My Claims")]
+        [DataRow("Employee Claims")]
+        [DataRow("Assign Claim")]
 
         public async Task TestElementPageVisible(string element)
         {
             _navigationPanelPage = new NavigationPanelPage(_page);
-            await _navigationPanelPage.GoToPageAsync("Leave");
+            await _navigationPanelPage.GoToPageAsync("Claim");
 
-            // Create a LeavePage object
-            _LeavePage = new LeavePage(_page);
+            // Create a ClaimPage object
+            _ClaimPage = new ClaimPage(_page);
 
             // Navigate to the element page
-            await _LeavePage.GoToElementPageAsync(element);
+            await _ClaimPage.GoToElementPageAsync(element);
 
             // Get the text on the element page header
-            var headerText = await _LeavePage.GetElementPageHeaderText(element);
+            var headerText = await _ClaimPage.GetElementPageHeaderText(element);
             Console.WriteLine($"Actual Header Text: {headerText}");
 
             // Perform verifications or interactions on the element page
-            bool isElementPageVisible = await _LeavePage.IsElementPageVisibleAsync(element);
+            bool isElementPageVisible = await _ClaimPage.IsElementPageVisibleAsync(element);
             Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
         }
 
         [TestMethod]
         [TestCategory("PositiveTest")]
-        [TestCategory("Leave Page Elements")]
-        [DataRow("Apply")]
-        [DataRow("My Leave")]
-        [DataRow("Entitlements")]
-        [DataRow("Reports ")]
-        [DataRow("Configure ")]
-        [DataRow("Leave List")]
-        [DataRow("Assign Leave")]
+        [TestCategory("Claim Page Elements")]
+        [DataRow("Configuration ")]
+        [DataRow("Submit Claim")]
+        [DataRow("My Claims")]
+        [DataRow("Employee Claims")]
+        [DataRow("Assign Claim")]
 
         public async Task TestElementPageVisible2(string element)
         {
             _navigationPanelPage = new NavigationPanelPage(_page);
-            await _navigationPanelPage.GoToPageAsync("Leave");
+            await _navigationPanelPage.GoToPageAsync("Claim");
 
-            // Create a LeavePage object
-            _LeavePage = new LeavePage(_page);
+            // Create a ClaimPage object
+            _ClaimPage = new ClaimPage(_page);
 
             if (AdminPage.elements.ContainsKey(element))
             {
                 if (AdminPage.elements[element] is Array)
                 {
                     // Navigate to the element page
-                    await _LeavePage.GoToElementPageAsync(element);
+                    await _ClaimPage.GoToElementPageAsync(element);
 
                     // Get the text on the element page header
-                    var headerText = await _LeavePage.GetElementPageHeaderText(element);
+                    var headerText = await _ClaimPage.GetElementPageHeaderText(element);
                     Console.WriteLine($"Actual Header Text: {headerText}");
                     Assert.AreEqual(element, headerText, false, $"The header {element} was not found.");
 
                     // Perform verifications or interactions on the element page
-                    bool isElementPageVisible = await _LeavePage.IsElementPageVisibleAsync(element);
+                    bool isElementPageVisible = await _ClaimPage.IsElementPageVisibleAsync(element);
                     Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
                 }
                 else
                 {
                     Console.WriteLine($"The element {element} has multiple choices.");
-                    Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)LeavePage.elements[element];
+                    Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)ClaimPage.elements[element];
                     foreach (string subelement in subelements.Keys)
                     {
                         Console.WriteLine($"The sub-element is {subelement}.");
 
                         // Navigate to the element page
-                        await _LeavePage.GoToElementPageAsync(element);
+                        await _ClaimPage.GoToElementPageAsync(element);
 
                         // Navigate to the sub-element
-                        await _LeavePage.GoToSubelementPageAsync(element, subelement);
+                        await _ClaimPage.GoToSubelementPageAsync(element, subelement);
 
                         // Get the text on the element page header
-                        var headerText = await _LeavePage.GetSublementPageHeaderText(element, subelement);
+                        var headerText = await _ClaimPage.GetSublementPageHeaderText(element, subelement);
                         Console.WriteLine($"Actual Header Text: {headerText}");
                         string expected = subelements[subelement][1] == "" ? subelement : subelements[subelement][1];
                         Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found.");
 
                         // Perform verifications or interactions on the element page
-                        bool isElementPageVisible = await _LeavePage.IsElementPageVisibleAsync(element);
+                        bool isElementPageVisible = await _ClaimPage.IsElementPageVisibleAsync(element);
                         Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
                     }
                 }
