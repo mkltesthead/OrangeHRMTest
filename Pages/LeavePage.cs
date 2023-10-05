@@ -9,15 +9,6 @@
             _page = page;
         }
 
-        /*
-        public static Dictionary<string, string> elements = new Dictionary<string, string>() {
-            {"Apply"       , ""},
-            {"My Leave"    , ""},
-            {"Leave List"  , ""},
-            {"Assign Leave", ""}
-        };
-        */
-
         // The keys of this dictionary are all the options across the top of the page
         // If the control isn't a dropdown then the corresponding value is an array containing 2 strings 0) the type of heading 1) the heading text
         // If the type of heading is "" then "h6" is used
@@ -42,30 +33,6 @@
             {"Leave List"   , new string[] { "", "" } },
             {"Assign Leave" , new string[] { "", "" } }
         };
-
-        /*
-        public static string getElementSelector(string element)
-        {
-            return elements.ContainsKey(element) ? $"a[class='oxd-topbar-body-nav-tab-item']:text('{element}')" : "";
-        }
-
-        // Methods to interact with elements on the page
-        public async Task GoToElementPageAsync(string element)
-        {
-            await _page.ClickAsync(getElementSelector(element));
-        }
-
-        // Example verification method
-        public async Task<bool> IsElementPageVisibleAsync(string element)
-        {
-            return await _page.IsVisibleAsync(getElementSelector(element));
-        }
-
-        public async Task<string> GetElementPageHeaderText(string element)
-        {
-            return await _page.InnerTextAsync(getElementSelector(element));
-        }
-        */
 
         public static string getElementSelector(string element)
         {
