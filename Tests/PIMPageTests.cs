@@ -133,4 +133,5 @@ namespace OrangeHRMTest.Tests
                 Console.WriteLine($"The element {element} does not exist on the Admin page.");
             }
         }
+    }
 }
