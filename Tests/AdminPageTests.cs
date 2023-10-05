@@ -51,7 +51,7 @@
             _navigationPanelPage = new NavigationPanelPage(_page);
             await _navigationPanelPage.GoToPageAsync("Admin");
 
-            // Create a PIMPage object
+            // Create a AdminPage object
             _AdminPage = new AdminPage(_page);
 
             // Navigate to the element page
@@ -82,12 +82,12 @@
             _navigationPanelPage = new NavigationPanelPage(_page);
             await _navigationPanelPage.GoToPageAsync("Admin");
 
-            // Create a PIMPage object
+            // Create a AdminPage object
             _AdminPage = new AdminPage(_page);
 
             if (AdminPage.elements.ContainsKey(element))
             {
-                if (AdminPage.elements[element].Count == 0)
+                if (AdminPage.elements[element] is Array)
                 {
                     // Navigate to the element page
                     await _AdminPage.GoToElementPageAsync(element);
@@ -104,7 +104,8 @@
                 else
                 {
                     Console.WriteLine($"The element {element} has multiple choices.");
-                    foreach (string subelement in AdminPage.elements[element].Keys)
+                    Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)AdminPage.elements[element];
+                    foreach (string subelement in subelements.Keys)
                     {
                         Console.WriteLine($"The sub-element is {subelement}.");
 
@@ -117,7 +118,7 @@
                         // Get the text on the element page header
                         var headerText = await _AdminPage.GetSublementPageHeaderText(element, subelement);
                         Console.WriteLine($"Actual Header Text: {headerText}");
-                        string expected = AdminPage.elements[element][subelement][1] == "" ? subelement : AdminPage.elements[element][subelement][1];
+                        string expected = subelements[subelement][1] == "" ? subelement : subelements[subelement][1];
                         Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found.");
 
                         // Perform verifications or interactions on the element page

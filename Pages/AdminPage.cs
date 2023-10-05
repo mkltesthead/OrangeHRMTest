@@ -10,13 +10,15 @@
         }
 
         // The keys of this dictionary are all the options across the top of the page
-        // If the control isn't a dropdown then the corresponding value is an empty dictionary
+        // If the control isn't a dropdown then the corresponding value is an array containing 2 strings 0) the type of heading 1) the heading text
+        // If the type of heading is "" then "h6" is used
+        // If the heading text is "" then the key is used
         // If the control is a drop down then the corresponding value is a second dictionary
         // The keys of the second dictionary are the drop down options
         // The corresponding values of the second dictionary are arrays containing 2 strings 0) the type of heading 1) the heading text
         // If the type of heading is "" then "h6" is used
         // If the heading text is "" then the key is used
-        public static Dictionary<string, Dictionary<string, string[]>> elements = new Dictionary<string, Dictionary<string, string[]>>() {
+        public static Dictionary<string, object> elements = new Dictionary<string, object>() {
             {"User Management "  , new Dictionary<string, string[]>{ { "Users", new string[] { "h5", "System Users" } } } },
             {"Job "              , new Dictionary<string, string[]>{ { "Job Titles", new string[] { "", "" } },
                                                                      { "Pay Grades", new string[] { "", "" } },
@@ -31,8 +33,8 @@
                                                                      { "Licenses", new string[] { "", "" } },
                                                                      { "Languages", new string[] { "", "" } },
                                                                      { "Memberships", new string[] { "", "" } } } },
-            {"Nationalities"     , new Dictionary<string, string[]>{ } },
-            {"Corporate Branding", new Dictionary<string, string[]>{ } },
+            {"Nationalities"     , new string[] { "", "" } },
+            {"Corporate Branding", new string[] { "", "" } },
             {"Configuration "    , new Dictionary<string, string[]>{ { "Email Configuration", new string[] { "p", "" } },
                                                                      { "Email Subscriptions", new string[] { "", "" } },
                                                                      { "Localization", new string[] { "", "" } },
@@ -45,17 +47,33 @@
 
         public static string getElementSelector(string element)
         {
-            return elements.ContainsKey(element) ? $"{(elements[element].Count == 0 ? "a" : "span")}[class='oxd-topbar-body-nav-tab-item']:text('{element}')" : "";
+            return elements.ContainsKey(element) ? $"{(elements[element] is Array ? "a" : "span")}[class='oxd-topbar-body-nav-tab-item']:text('{element}')" : "";
         }
 
         public static string getSubelementSelector(string element, string subelement)
         {
-            return (elements.ContainsKey(element) && elements[element].ContainsKey(subelement)) ? $"a[class='oxd-topbar-body-nav-tab-link']:text('{subelement}')" : "";
+            string returnValue = "";
+            if (elements.ContainsKey(element) && elements[element] is not Array)
+            {
+                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>) elements[element];
+                returnValue = subelements.ContainsKey(subelement) ? $"a[class='oxd-topbar-body-nav-tab-link']:text('{subelement}')" : "";
+            }
+            return returnValue;
         }
 
         public static string getSubelementHeaderSelector(string element, string subelement)
-        { 
-            return (elements.ContainsKey(element) && elements[element].ContainsKey(subelement)) ? $"{(elements[element][subelement][0] == "" ? "h6" : elements[element][subelement][0])}.oxd-text:has-text('{(elements[element][subelement][1] == "" ? subelement : elements[element][subelement][1])}')" : "";
+        {
+            string returnValue = "";
+            if (elements.ContainsKey(element) && elements[element] is not Array)
+            {
+                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>) elements[element];
+                if (subelements.ContainsKey(subelement))
+                {
+                    string[] details = subelements[subelement];
+                    returnValue = $"{(details[0] == "" ? "h6" : details[0])}.oxd-text:has-text('{(details[1] == "" ? subelement : details[1])}')";
+                }
+            }
+            return returnValue;
         }
 
         // Methods to interact with elements on the page
