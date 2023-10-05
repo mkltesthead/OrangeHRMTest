@@ -1,4 +1,4 @@
-﻿namespace OrangeHRMTest.Pages
+﻿namespace OrangeHRMTest.Pages.PIM
 {
     public class AddEmployeePage
     {
@@ -27,8 +27,6 @@
         {
             await _page.ClickAsync(SubmitButtonSelector);
         }
-
         // Add any additional methods or verifications as needed
     }
-
 }

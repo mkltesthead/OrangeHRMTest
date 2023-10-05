@@ -1,4 +1,4 @@
-﻿namespace OrangeHRMTest.Pages
+﻿namespace OrangeHRMTest.Pages.PIM
 {
     public class PIMPage
     {
