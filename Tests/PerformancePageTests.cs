@@ -103,7 +103,7 @@ namespace OrangeHRMTest.Tests
                 else
                 {
                     Console.WriteLine($"The element {element} has multiple choices.");
-                    Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)AdminPage.elements[element];
+                    Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)PerformancePage.elements[element];
                     foreach (string subelement in subelements.Keys)
                     {
                         Console.WriteLine($"The sub-element is {subelement}.");
