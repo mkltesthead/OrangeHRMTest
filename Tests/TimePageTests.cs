@@ -3,14 +3,14 @@
 namespace OrangeHRMTest.Tests
 {
     [TestClass]
-    public class LeavePageTests
+    public class TimePageTests
     {
         private IBrowser? _browser;
         private IBrowserContext? _context;
         private IPage? _page;
         private LoginPage? _loginPage; // POM created for Login Page
         private NavigationPanelPage? _navigationPanelPage; // POM created for the NavigationPanel
-        private LeavePage? _LeavePage; // POM created for the Leave Page
+        private TimePage? _TimePage; // POM created for the Time Page
         [TestInitialize]
         public async Task Setup()
         {
@@ -42,67 +42,66 @@ namespace OrangeHRMTest.Tests
             await _browser.CloseAsync();
         }
 
+        /*
         [TestMethod]
         [TestCategory("PositiveTest")]
-        [TestCategory("Leave Page Elements")]
-        [DataRow("Apply")]
-        [DataRow("My Leave")]
-        [DataRow("Leave List")]
-        [DataRow("Assign Leave")]
+        [TestCategory("Time Page Elements")]
+        [DataRow("Timesheets ")]        
+        [DataRow("Attendance ")]
+        [DataRow("Reports ")]
+        [DataRow("Project Info ")]
 
         public async Task TestElementPageVisible(string element)
         {
             _navigationPanelPage = new NavigationPanelPage(_page);
-            await _navigationPanelPage.GoToPageAsync("Leave");
+            await _navigationPanelPage.GoToPageAsync("Time");
 
-            // Create a LeavePage object
-            _LeavePage = new LeavePage(_page);
+            // Create a TimePage object
+            _TimePage = new TimePage(_page);
 
             // Navigate to the element page
-            await _LeavePage.GoToElementPageAsync(element);
+            await _TimePage.GoToElementPageAsync(element);
 
             // Get the text on the element page header
-            var headerText = await _LeavePage.GetElementPageHeaderText(element);
+            var headerText = await _TimePage.GetElementPageHeaderText(element);
             Console.WriteLine($"Actual Header Text: {headerText}");
 
             // Perform verifications or interactions on the element page
-            bool isElementPageVisible = await _LeavePage.IsElementPageVisibleAsync(element);
+            bool isElementPageVisible = await _TimePage.IsElementPageVisibleAsync(element);
             Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
         }
+        */
 
         [TestMethod]
         [TestCategory("PositiveTest")]
-        [TestCategory("Leave Page Elements")]
-        [DataRow("Apply")]        
-        [DataRow("My Leave")]
-        [DataRow("Entitlements")]
+        [TestCategory("Time Page Elements")]
+        [DataRow("Timesheets ")]        
+        [DataRow("Attendance ")]
         [DataRow("Reports ")]
-        [DataRow("Configure ")]
-        [DataRow("Leave List")]
-        [DataRow("Assign Leave")]
+        [DataRow("Project Info ")]
 
         public async Task TestElementPageVisible2(string element)
         {
             _navigationPanelPage = new NavigationPanelPage(_page);
-            await _navigationPanelPage.GoToPageAsync("Leave");
+            await _navigationPanelPage.GoToPageAsync("Time");
 
-            // Create a LeavePage object
-            _LeavePage = new LeavePage(_page);
+            // Create a TimePage object
+            _TimePage = new TimePage(_page);
 
             if (AdminPage.elements.ContainsKey(element))
             {
                 if (AdminPage.elements[element] is Array)
                 {
                     // Navigate to the element page
-                    await _LeavePage.GoToElementPageAsync(element);
+                    await _TimePage.GoToElementPageAsync(element);
 
                     // Get the text on the element page header
-                    var headerText = await _LeavePage.GetElementPageHeaderText(element);
+                    var headerText = await _TimePage.GetElementPageHeaderText(element);
                     Console.WriteLine($"Actual Header Text: {headerText}");
                     Assert.AreEqual(element, headerText, false, $"The header {element} was not found.");
 
                     // Perform verifications or interactions on the element page
-                    bool isElementPageVisible = await _LeavePage.IsElementPageVisibleAsync(element);
+                    bool isElementPageVisible = await _TimePage.IsElementPageVisibleAsync(element);
                     Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
                 }
                 else
@@ -114,19 +113,19 @@ namespace OrangeHRMTest.Tests
                         Console.WriteLine($"The sub-element is {subelement}.");
 
                         // Navigate to the element page
-                        await _LeavePage.GoToElementPageAsync(element);
+                        await _TimePage.GoToElementPageAsync(element);
 
                         // Navigate to the sub-element
-                        await _LeavePage.GoToSubelementPageAsync(element, subelement);
+                        await _TimePage.GoToSubelementPageAsync(element, subelement);
 
                         // Get the text on the element page header
-                        var headerText = await _LeavePage.GetSublementPageHeaderText(element, subelement);
+                        var headerText = await _TimePage.GetSublementPageHeaderText(element, subelement);
                         Console.WriteLine($"Actual Header Text: {headerText}");
                         string expected = subelements[subelement][1] == "" ? subelement : subelements[subelement][1];
                         Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found.");
 
                         // Perform verifications or interactions on the element page
-                        bool isElementPageVisible = await _LeavePage.IsElementPageVisibleAsync(element);
+                        bool isElementPageVisible = await _TimePage.IsElementPageVisibleAsync(element);
                         Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible.");
                     }
                 }
