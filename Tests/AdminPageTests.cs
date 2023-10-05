@@ -8,14 +8,14 @@
         private IPage? _page;
         private LoginPage? _loginPage; // POM created for Login Page
         private NavigationPanelPage? _navigationPanelPage; // POM created for the NavigationPanel
-        private AdminPage? _AdminPage; // POM created for the PIM Page
+        private AdminPage? _AdminPage; // POM created for the Admin Page
         [TestInitialize]
         public async Task Setup()
         {
             // Initialize browser, context, and page
             var playwright = await Playwright.CreateAsync();
 
-            bool demo = true;
+            bool demo = false;
             BrowserTypeLaunchOptions options = new BrowserTypeLaunchOptions();
             if (demo)
             {
