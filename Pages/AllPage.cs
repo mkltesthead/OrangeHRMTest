@@ -25,7 +25,7 @@ namespace OrangeHRMTest.Pages
         // If the type of heading is "" then "h6" is used
         // If the heading text is "" then the key is used 
         public static Dictionary<string, object> allElements = new Dictionary<string, object>() {
-            {"Admin", new Dictionary<string, object>() {
+            {"Admin"      , new Dictionary<string, object>() {
                 {"User Management "  , new Dictionary<string, string[]>{ { "Users", new string[] { "h5", "System Users" } } } },
                 {"Job "              , new Dictionary<string, string[]>{ { "Job Titles", new string[] { "", "" } },
                                                                          { "Pay Grades", new string[] { "", "" } },
@@ -51,7 +51,7 @@ namespace OrangeHRMTest.Pages
                                                                          { "Register OAuth Client", new string[   ] { "", "OAuth Client List" } },
                                                                          { "LDAP Configuration", new string[] { "", "" } } } } }
             },
-            {"PIM", new Dictionary<string, object>() {
+            {"PIM"        , new Dictionary<string, object>() {
                 {"Configuration "    , new Dictionary<string, string[]>{ { "Optional Fields", new string[] { "p", "" } },
                                                                          { "Custom Fields", new string[] { "", "" } },
                                                                          { "Data Import", new string[] { "p", "" } },
@@ -61,7 +61,7 @@ namespace OrangeHRMTest.Pages
                 {"Add Employee"      , new string[] { "", "" } },
                 {"Reports"           , new string[] { "h5", "Employee Reports" } } }
             },
-            {"Leave", new Dictionary<string, object>() {
+            {"Leave"      , new Dictionary<string, object>() {
                 {"Apply"             , new string[] { "", "Apply Leave" } },
                 {"My Leave"          , new string[] { "h5", "My Leave List" } },
                 {"Entitlements "     , new Dictionary<string, string[]>{ { "Add Entitlements", new string[] { "p", "Add Leave Entitlement" } },
@@ -76,7 +76,7 @@ namespace OrangeHRMTest.Pages
                 {"Leave List"        , new string[] { "", "" } },
                 {"Assign Leave"      , new string[] { "", "" } } }
             },
-            {"Time", new Dictionary<string, object>() {
+            {"Time"       , new Dictionary<string, object>() {
                 {"Timesheets "       , new Dictionary<string, string[]>{ { "My Timesheets", new string[] { "", "My Timesheet" } },
                                                                          { "Employee Timesheets", new string[] { "", "Select Employee" } } } },
                 {"Attendance "       , new Dictionary<string, string[]>{ { "My Records", new string[] { "h5", "My Attendance Records" } },
@@ -102,7 +102,7 @@ namespace OrangeHRMTest.Pages
                 {"My Trackers"       , new string[] { "", "My Performance Trackers" } },
                 {"Employee Trackers" , new string[] { "h5", "Employee Performance Trackers" } } }
             },
-            {"Claim", new Dictionary<string, object>() {
+            {"Claim"      , new Dictionary<string, object>() {
                 {"Configuration "    , new Dictionary<string, string[]>{ { "Events", new string[] { "h5", "" } },
                                                                          { "Expense Types", new string[] { "h5", "" } } } },
                 {"Submit Claim"      , new string[] { "", "Create Claim Request" } },
