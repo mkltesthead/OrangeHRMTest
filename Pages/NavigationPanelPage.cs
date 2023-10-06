@@ -2,7 +2,6 @@
 {
     public class NavigationPanelPage
     {
-
         private readonly IPage? _page;
 
         public NavigationPanelPage(IPage page)

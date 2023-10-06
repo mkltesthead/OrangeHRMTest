@@ -1,10 +1,10 @@
 ﻿namespace OrangeHRMTest.Pages
 {
-    public class LeavePage
+    public class ClaimPage
     {
         private readonly IPage _page;
 
-        public LeavePage(IPage page)
+        public ClaimPage(IPage page)
         {
             _page = page;
         }
@@ -19,19 +19,12 @@
         // If the type of heading is "" then "h6" is used
         // If the heading text is "" then the key is used
         public static Dictionary<string, object> elements = new Dictionary<string, object>() {
-            {"Apply"        , new string[] { "", "Apply Leave" } },
-            {"My Leave"     , new string[] { "h5", "My Leave List" } },
-            {"Entitlements ", new Dictionary<string, string[]>{ { "Add Entitlements", new string[] { "p", "Add Leave Entitlement" } },
-                                                                { "Employee Entitlements", new string[] { "h5", "Leave Entitlements" } },
-                                                                { "My Entitlements", new string[] { "h5", "My Leave Entitlements" } } } },
-            {"Reports "     , new Dictionary<string, string[]>{ { "Leave Entitlements and Usage Report", new string[] { "h5", "" } },
-                                                                { "My Leave Entitlements and Usage Report", new string[] { "h5", "" } } } },
-            {"Configure "   , new Dictionary<string, string[]>{ { "Leave Period", new string[] { "p", "" } },
-                                                                { "Leave Types", new string[] { "", "" } },
-                                                                { "Work Week", new string[] { "p", "" } },
-                                                                { "Holidays", new string[] { "h5", "" } } } },
-            {"Leave List"   , new string[] { "", "" } },
-            {"Assign Leave" , new string[] { "", "" } }
+            {"Configuration " , new Dictionary<string, string[]>{ { "Events", new string[] { "h5", "" } },
+                                                                  { "Expense Types", new string[] { "h5", "" } } } },
+            {"Submit Claim"   , new string[] { "", "Create Claim Request" } },
+            {"My Claims"      , new string[] { "h5", "" } },
+            {"Employee Claims", new string[] { "h5", "" } },
+            {"Assign Claim"   , new string[] { "", "Create Claim Request" } }
         };
 
         public static string getElementSelector(string element)

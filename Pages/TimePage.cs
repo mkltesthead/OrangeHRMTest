@@ -1,10 +1,10 @@
 ﻿namespace OrangeHRMTest.Pages
 {
-    public class LeavePage
+    public class TimePage
     {
         private readonly IPage _page;
 
-        public LeavePage(IPage page)
+        public TimePage(IPage page)
         {
             _page = page;
         }
@@ -19,19 +19,17 @@
         // If the type of heading is "" then "h6" is used
         // If the heading text is "" then the key is used
         public static Dictionary<string, object> elements = new Dictionary<string, object>() {
-            {"Apply"        , new string[] { "", "Apply Leave" } },
-            {"My Leave"     , new string[] { "h5", "My Leave List" } },
-            {"Entitlements ", new Dictionary<string, string[]>{ { "Add Entitlements", new string[] { "p", "Add Leave Entitlement" } },
-                                                                { "Employee Entitlements", new string[] { "h5", "Leave Entitlements" } },
-                                                                { "My Entitlements", new string[] { "h5", "My Leave Entitlements" } } } },
-            {"Reports "     , new Dictionary<string, string[]>{ { "Leave Entitlements and Usage Report", new string[] { "h5", "" } },
-                                                                { "My Leave Entitlements and Usage Report", new string[] { "h5", "" } } } },
-            {"Configure "   , new Dictionary<string, string[]>{ { "Leave Period", new string[] { "p", "" } },
-                                                                { "Leave Types", new string[] { "", "" } },
-                                                                { "Work Week", new string[] { "p", "" } },
-                                                                { "Holidays", new string[] { "h5", "" } } } },
-            {"Leave List"   , new string[] { "", "" } },
-            {"Assign Leave" , new string[] { "", "" } }
+            {"Timesheets "  , new Dictionary<string, string[]>{ { "My Timesheets", new string[] { "", "My Timesheet" } },
+                                                                { "Employee Timesheets", new string[] { "", "Select Employee" } } } },
+            {"Attendance "  , new Dictionary<string, string[]>{ { "My Records", new string[] { "h5", "My Attendance Records" } },
+                                                                { "Punch In/Out", new string[] { "", "Punch In" } },
+                                                                { "Employee Records", new string[] { "h5", "Employee Attendance Records" } },
+                                                                { "Configuration", new string[] { "", "Attendance Configuration" } } } },
+            {"Reports "     , new Dictionary<string, string[]>{ { "Project Reports", new string[] { "h5", "Project Report" } },
+                                                                { "Employee Reports", new string[] { "h5", "Employee Report" } },
+                                                                { "Attendance Summary", new string[] { "h5", "Attendance Total Summary Report" } } } },
+            {"Project Info ", new Dictionary<string, string[]>{ { "Customers", new string[] { "", "" } },
+                                                                { "Projects", new string[] { "h5", "" } } } }
         };
 
         public static string getElementSelector(string element)

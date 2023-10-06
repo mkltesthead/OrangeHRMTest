@@ -1,10 +1,10 @@
-﻿namespace OrangeHRMTest.Pages
+﻿namespace OrangeHRMTest.Pages.PIM
 {
-    public class LeavePage
+    public class PIMPage
     {
         private readonly IPage _page;
 
-        public LeavePage(IPage page)
+        public PIMPage(IPage page)
         {
             _page = page;
         }
@@ -19,19 +19,14 @@
         // If the type of heading is "" then "h6" is used
         // If the heading text is "" then the key is used
         public static Dictionary<string, object> elements = new Dictionary<string, object>() {
-            {"Apply"        , new string[] { "", "Apply Leave" } },
-            {"My Leave"     , new string[] { "h5", "My Leave List" } },
-            {"Entitlements ", new Dictionary<string, string[]>{ { "Add Entitlements", new string[] { "p", "Add Leave Entitlement" } },
-                                                                { "Employee Entitlements", new string[] { "h5", "Leave Entitlements" } },
-                                                                { "My Entitlements", new string[] { "h5", "My Leave Entitlements" } } } },
-            {"Reports "     , new Dictionary<string, string[]>{ { "Leave Entitlements and Usage Report", new string[] { "h5", "" } },
-                                                                { "My Leave Entitlements and Usage Report", new string[] { "h5", "" } } } },
-            {"Configure "   , new Dictionary<string, string[]>{ { "Leave Period", new string[] { "p", "" } },
-                                                                { "Leave Types", new string[] { "", "" } },
-                                                                { "Work Week", new string[] { "p", "" } },
-                                                                { "Holidays", new string[] { "h5", "" } } } },
-            {"Leave List"   , new string[] { "", "" } },
-            {"Assign Leave" , new string[] { "", "" } }
+            {"Configuration ", new Dictionary<string, string[]>{ { "Optional Fields", new string[] { "p", "" } },
+                                                                 { "Custom Fields", new string[] { "", "" } },
+                                                                 { "Data Import", new string[] { "p", "" } },
+                                                                 { "Reporting Methods", new string[] { "p", "" } },
+                                                                 { "Termination Reasons", new string[] { "p", "" } } } },
+            {"Employee List" , new string[] { "h5", "Employee Information" } },
+            {"Add Employee"  , new string[] { "", "" } },
+            {"Reports"       , new string[] { "h5", "Employee Reports" } }
         };
 
         public static string getElementSelector(string element)
@@ -44,7 +39,7 @@
             string returnValue = "";
             if (elements.ContainsKey(element) && elements[element] is not Array)
             {
-                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>) elements[element];
+                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)elements[element];
                 returnValue = subelements.ContainsKey(subelement) ? $"a[class='oxd-topbar-body-nav-tab-link']:text('{subelement}')" : "";
             }
             return returnValue;
@@ -55,7 +50,7 @@
             string returnValue = "";
             if (elements.ContainsKey(element) && elements[element] is not Array)
             {
-                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>) elements[element];
+                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)elements[element];
                 if (subelements.ContainsKey(subelement))
                 {
                     string[] details = subelements[subelement];
