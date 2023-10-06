@@ -52,63 +52,63 @@ namespace OrangeHRMTest.Pages
                                                                          { "LDAP Configuration", new string[] { "", "" } } } } }
             },
             {"PIM", new Dictionary<string, object>() {
-                {"Configuration ", new Dictionary<string, string[]>{ { "Optional Fields", new string[] { "p", "" } },
-                                                                     { "Custom Fields", new string[] { "", "" } },
-                                                                     { "Data Import", new string[] { "p", "" } },
-                                                                     { "Reporting Methods", new string[] { "p", "" } },
-                                                                     { "Termination Reasons", new string[] { "p", "" } } } },
-                {"Employee List" , new string[] { "h5", "Employee Information" } },
-                {"Add Employee"  , new string[] { "", "" } },
-                {"Reports"       , new string[] { "h5", "Employee Reports" } } }
+                {"Configuration "    , new Dictionary<string, string[]>{ { "Optional Fields", new string[] { "p", "" } },
+                                                                         { "Custom Fields", new string[] { "", "" } },
+                                                                         { "Data Import", new string[] { "p", "" } },
+                                                                         { "Reporting Methods", new string[] { "p", "" } },
+                                                                         { "Termination Reasons", new string[] { "p", "" } } } },
+                {"Employee List"     , new string[] { "h5", "Employee Information" } },
+                {"Add Employee"      , new string[] { "", "" } },
+                {"Reports"           , new string[] { "h5", "Employee Reports" } } }
             },
             {"Leave", new Dictionary<string, object>() {
-                {"Apply"        , new string[] { "", "Apply Leave" } },
-                {"My Leave"     , new string[] { "h5", "My Leave List" } },
-                {"Entitlements ", new Dictionary<string, string[]>{ { "Add Entitlements", new string[] { "p", "Add Leave Entitlement" } },
-                                                                    { "Employee Entitlements", new string[] { "h5", "Leave Entitlements" } },
-                                                                    { "My Entitlements", new string[] { "h5", "My Leave Entitlements" } } } },
-                {"Reports "     , new Dictionary<string, string[]>{ { "Leave Entitlements and Usage Report", new string[] { "h5", "" } },
-                                                                    { "My Leave Entitlements and Usage Report", new string[] { "h5", "" } } } },
-                {"Configure "   , new Dictionary<string, string[]>{ { "Leave Period", new string[] { "p", "" } },
-                                                                    { "Leave Types", new string[] { "", "" } },
-                                                                    { "Work Week", new string[] { "p", "" } },
-                                                                    { "Holidays", new string[] { "h5", "" } } } },
-                {"Leave List"   , new string[] { "", "" } },
-                {"Assign Leave" , new string[] { "", "" } } }
+                {"Apply"             , new string[] { "", "Apply Leave" } },
+                {"My Leave"          , new string[] { "h5", "My Leave List" } },
+                {"Entitlements "     , new Dictionary<string, string[]>{ { "Add Entitlements", new string[] { "p", "Add Leave Entitlement" } },
+                                                                         { "Employee Entitlements", new string[] { "h5", "Leave Entitlements" } },
+                                                                         { "My Entitlements", new string[] { "h5", "My Leave Entitlements" } } } },
+                {"Reports "          , new Dictionary<string, string[]>{ { "Leave Entitlements and Usage Report", new string[] { "h5", "" } },
+                                                                         { "My Leave Entitlements and Usage Report", new string[] { "h5", "" } } } },
+                {"Configure "        , new Dictionary<string, string[]>{ { "Leave Period", new string[] { "p", "" } },
+                                                                         { "Leave Types", new string[] { "", "" } },
+                                                                         { "Work Week", new string[] { "p", "" } },
+                                                                         { "Holidays", new string[] { "h5", "" } } } },
+                {"Leave List"        , new string[] { "", "" } },
+                {"Assign Leave"      , new string[] { "", "" } } }
             },
             {"Time", new Dictionary<string, object>() {
-                {"Timesheets "  , new Dictionary<string, string[]>{ { "My Timesheets", new string[] { "", "My Timesheet" } },
-                                                                    { "Employee Timesheets", new string[] { "", "Select Employee" } } } },
-                {"Attendance "  , new Dictionary<string, string[]>{ { "My Records", new string[] { "h5", "My Attendance Records" } },
-                                                                    { "Punch In/Out", new string[] { "", "Punch In" } },
-                                                                    { "Employee Records", new string[] { "h5", "Employee Attendance Records" } },
-                                                                    { "Configuration", new string[] { "", "Attendance Configuration" } } } },
-                {"Reports "     , new Dictionary<string, string[]>{ { "Project Reports", new string[] { "h5", "Project Report" } },
-                                                                    { "Employee Reports", new string[] { "h5", "Employee Report" } },
-                                                                    { "Attendance Summary", new string[] { "h5", "Attendance Total Summary Report" } } } },
-                {"Project Info ", new Dictionary<string, string[]>{ { "Customers", new string[] { "", "" } },
-                                                                    { "Projects", new string[] { "h5", "" } } } } }
+                {"Timesheets "       , new Dictionary<string, string[]>{ { "My Timesheets", new string[] { "", "My Timesheet" } },
+                                                                         { "Employee Timesheets", new string[] { "", "Select Employee" } } } },
+                {"Attendance "       , new Dictionary<string, string[]>{ { "My Records", new string[] { "h5", "My Attendance Records" } },
+                                                                         { "Punch In/Out", new string[] { "", "Punch In" } },
+                                                                         { "Employee Records", new string[] { "h5", "Employee Attendance Records" } },
+                                                                         { "Configuration", new string[] { "", "Attendance Configuration" } } } },
+                {"Reports "          , new Dictionary<string, string[]>{ { "Project Reports", new string[] { "h5", "Project Report" } },
+                                                                         { "Employee Reports", new string[] { "h5", "Employee Report" } },
+                                                                         { "Attendance Summary", new string[] { "h5", "Attendance Total Summary Report" } } } },
+                {"Project Info "     , new Dictionary<string, string[]>{ { "Customers", new string[] { "", "" } },
+                                                                         { "Projects", new string[] { "h5", "" } } } } }
             },
             {"Recruitment", new Dictionary<string, object>() {
-                {"Candidates", new string[] { "h5", "" } },
-                {"Vacancies" , new string[] { "h5", "" } } }
+                {"Candidates"        , new string[] { "h5", "" } },
+                {"Vacancies"         , new string[] { "h5", "" } } }
             },
             {"Performance", new Dictionary<string, object>() {
-                {"Configure "       , new Dictionary<string, string[]>{ { "KPIs", new string[] { "h5", "Key Performance Indicators for Job Title" } },
-                                                                        { "Trackers", new string[] { "h5", "Performance Trackers" } } } },
-                {"Manage Reviews "  , new Dictionary<string, string[]>{ { "Manage Reviews", new string[] { "h5", "Manage Performance Reviews" } },
-                                                                        { "My Reviews", new string[] { "", "" } },
-                                                                        { "Employee Reviews", new string[] { "h5", "" } } } },
-                {"My Trackers"      , new string[] { "", "My Performance Trackers" } },
-                {"Employee Trackers", new string[] { "h5", "Employee Performance Trackers" } } }
+                {"Configure "        , new Dictionary<string, string[]>{ { "KPIs", new string[] { "h5", "Key Performance Indicators for Job Title" } },
+                                                                         { "Trackers", new string[] { "h5", "Performance Trackers" } } } },
+                {"Manage Reviews "   , new Dictionary<string, string[]>{ { "Manage Reviews", new string[] { "h5", "Manage Performance Reviews" } },
+                                                                         { "My Reviews", new string[] { "", "" } },
+                                                                         { "Employee Reviews", new string[] { "h5", "" } } } },
+                {"My Trackers"       , new string[] { "", "My Performance Trackers" } },
+                {"Employee Trackers" , new string[] { "h5", "Employee Performance Trackers" } } }
             },
             {"Claim", new Dictionary<string, object>() {
-                {"Configuration " , new Dictionary<string, string[]>{ { "Events", new string[] { "h5", "" } },
-                                                                      { "Expense Types", new string[] { "h5", "" } } } },
-                {"Submit Claim"   , new string[] { "", "Create Claim Request" } },
-                {"My Claims"      , new string[] { "h5", "" } },
-                {"Employee Claims", new string[] { "h5", "" } },
-                {"Assign Claim"   , new string[] { "", "Create Claim Request" } } }
+                {"Configuration "    , new Dictionary<string, string[]>{ { "Events", new string[] { "h5", "" } },
+                                                                         { "Expense Types", new string[] { "h5", "" } } } },
+                {"Submit Claim"      , new string[] { "", "Create Claim Request" } },
+                {"My Claims"         , new string[] { "h5", "" } },
+                {"Employee Claims"   , new string[] { "h5", "" } },
+                {"Assign Claim"      , new string[] { "", "Create Claim Request" } } }
             }
         };
 
