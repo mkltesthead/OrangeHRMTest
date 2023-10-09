@@ -147,5 +147,66 @@
                 Console.WriteLine($"There is no {screen} screeen");
             }
         }
+
+        [TestMethod]
+        [TestCategory("PositiveTest")]
+
+        public async Task TestElementPageVisible3()
+        {
+            _navigationPanelPage = new NavigationPanelPage(_page);
+                
+            // Create a AllPage object
+            _AllPage = new AllPage(_page);
+
+            foreach (string screen in AllPage.allElements.Keys)
+            {
+                await _navigationPanelPage.GoToPageAsync(screen);
+                Console.WriteLine($"\nThe screen is {screen}");
+
+                Dictionary<string, object> elements = (Dictionary<string, object>)AllPage.allElements[screen];
+                foreach (string element in elements.Keys)
+                {
+                    Console.WriteLine($"    The element is {element}");
+                    if (elements[element] is Array)
+                    {
+                        // Navigate to the element page
+                        await _AllPage.GoToElementPageAsync(elements, element);
+
+                        // Get the text on the element page header
+                        var headerText = await _AllPage.GetElementPageHeaderText(elements, element);
+                        Console.WriteLine($"    Actual header text: {headerText}");
+                        Assert.AreEqual(element, headerText, false, $"The header {element} was not found");
+
+                        // Perform verifications or interactions on the element page
+                        bool isElementPageVisible = await _AllPage.IsElementPageVisibleAsync(elements, element);
+                        Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible");
+                    }
+                    else
+                    {
+                        Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)elements[element];
+                        foreach (string subelement in subelements.Keys)
+                        {
+                            Console.WriteLine($"        The sub-element is {subelement}");
+
+                            // Navigate to the element page
+                            await _AllPage.GoToElementPageAsync(elements, element);
+
+                            // Navigate to the sub-element
+                            await _AllPage.GoToSubelementPageAsync(elements, element, subelement);
+
+                            // Get the text on the element page header
+                            var headerText = await _AllPage.GetSublementPageHeaderText(elements, element, subelement);
+                            Console.WriteLine($"        Actual header text: {headerText}");
+                            string expected = subelements[subelement][1] == "" ? subelement : subelements[subelement][1];
+                            Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found");
+
+                            // Perform verifications or interactions on the element page
+                            bool isElementPageVisible = await _AllPage.IsElementPageVisibleAsync(elements, element);
+                            Assert.IsTrue(isElementPageVisible, $"The {element} page is not visible");
+                        }
+                    }
+                }
+            }
+        }
     }
 }
