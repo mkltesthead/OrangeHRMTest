@@ -1,3 +1,5 @@
+using Microsoft.Playwright;
+
 namespace OrangeHRMTest.Tests
 {
     [TestClass]
@@ -12,7 +14,18 @@ namespace OrangeHRMTest.Tests
         public async Task Initialize()
         {
             _playwright = await Playwright.CreateAsync();
-            _browser = await _playwright.Chromium.LaunchAsync();
+
+            bool demo = false;
+            BrowserTypeLaunchOptions options = new BrowserTypeLaunchOptions();
+            if (demo)
+            {
+                options.Headless = false;
+                options.SlowMo = 1000;
+            }
+            //_browser = await _playwright.Chromium.LaunchAsync(options);
+            //_browser = await _playwright.Firefox.LaunchAsync(options);
+            _browser = await _playwright.Webkit.LaunchAsync(options);
+
             _page = await _browser.NewPageAsync();
         }
 
