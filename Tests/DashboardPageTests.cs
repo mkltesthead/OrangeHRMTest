@@ -15,7 +15,18 @@
         {
             // Initialize browser, context, and page
             var playwright = await Playwright.CreateAsync();
-            _browser = await playwright.Chromium.LaunchAsync();
+
+            bool demo = false;
+            BrowserTypeLaunchOptions options = new BrowserTypeLaunchOptions();
+            if (demo)
+            {
+                options.Headless = false;
+                options.SlowMo = 1000;
+            }
+            //_browser = await playwright.Chromium.LaunchAsync(options);
+            //_browser = await playwright.Firefox.LaunchAsync(options);
+            _browser = await playwright.Webkit.LaunchAsync(options);
+
             _context = await _browser.NewContextAsync();
             _page = await _context.NewPageAsync();
 

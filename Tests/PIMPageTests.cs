@@ -25,7 +25,9 @@ namespace OrangeHRMTest.Tests
                 options.Headless = false;
                 options.SlowMo = 1000;
             }
-            _browser = await playwright.Chromium.LaunchAsync(options);
+            //_browser = await playwright.Chromium.LaunchAsync(options);
+            //_browser = await playwright.Firefox.LaunchAsync(options);
+            _browser = await playwright.Webkit.LaunchAsync(options);
 
             _context = await _browser.NewContextAsync();
             _page = await _context.NewPageAsync();
