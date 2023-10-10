@@ -1,9 +1,4 @@
-﻿using Microsoft.Playwright.MSTest;
-using Microsoft.Playwright;
-using static System.Net.Mime.MediaTypeNames;
-using OrangeHRMTest.Pages;
-
-namespace OrangeHRMTest.Tests
+﻿namespace OrangeHRMTest.Tests
 {
     [TestClass]
     public class AdminCRUDTests

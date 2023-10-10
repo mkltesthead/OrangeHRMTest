@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace OrangeHRMTest.Tests
+﻿namespace OrangeHRMTest.Tests
 {
     [TestClass]
     public class AdminPageTests
