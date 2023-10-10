@@ -15,7 +15,7 @@
             // Initialize browser, context, and page
             var playwright = await Playwright.CreateAsync();
 
-            bool demo = true;
+            bool demo = false;
             BrowserTypeLaunchOptions options = new BrowserTypeLaunchOptions();
             if (demo)
             {
