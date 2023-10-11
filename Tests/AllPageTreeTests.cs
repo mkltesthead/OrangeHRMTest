@@ -1,4 +1,6 @@
-﻿namespace OrangeHRMTest.Tests
+﻿using System.Text.RegularExpressions;
+
+namespace OrangeHRMTest.Tests
 {
     [TestClass]
     public class AllPageTreeTests
@@ -88,6 +90,7 @@
 
         public async Task TestElementPageVisible2(string screen, string element)
         {
+            Regex isRegex = new Regex("^/(.*)/$");
             _navigationPanelPage = new NavigationPanelPage(_page);
             await _navigationPanelPage.GoToPageAsync(screen);
 
@@ -135,8 +138,17 @@
                             // Get the text on the element page header
                             var headerText = await _AllPageTree.GetSublementPageHeaderText(subelementId);
                             Console.WriteLine($"Actual Header Text: {headerText}");
-                            string expected = AllPageTree.allElements[subelementId][3] == "" ? subelement : AllPageTree.allElements[subelementId][3];
-                            Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found.");
+                            if (isRegex.IsMatch(AllPageTree.allElements[subelementId][3]))
+                            {
+                                string expectedPattern = isRegex.Replace(AllPageTree.allElements[subelementId][3], "$1");
+                                Regex expectedRegex = new Regex(expectedPattern);
+                                StringAssert.Matches(headerText, expectedRegex, $"The header did not match the expected pattern {expectedPattern}");
+                            }
+                            else
+                            {
+                                string expected = AllPageTree.allElements[subelementId][3] == "" ? subelement : AllPageTree.allElements[subelementId][3];
+                                Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found.");
+                            }
 
                             // Perform verifications or interactions on the element page
                             bool isElementPageVisible = await _AllPageTree.IsElementPageVisibleAsync(elementId);
@@ -160,6 +172,7 @@
 
         public async Task TestElementPageVisible3()
         {
+            Regex isRegex = new Regex("^/(.*)/$");
             _navigationPanelPage = new NavigationPanelPage(_page);
                 
             // Create a AllPage object
@@ -209,8 +222,17 @@
                             // Get the text on the element page header
                             var headerText = await _AllPageTree.GetSublementPageHeaderText(subelementId);
                             Console.WriteLine($"        Actual header text: {headerText}");
-                            string expected = AllPageTree.allElements[subelementId][3] == "" ? subelement : AllPageTree.allElements[subelementId][3];
-                            Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found");
+                            if (isRegex.IsMatch(AllPageTree.allElements[subelementId][3]))
+                            {
+                                string expectedPattern = isRegex.Replace(AllPageTree.allElements[subelementId][3], "$1");
+                                Regex expectedRegex = new Regex(expectedPattern);
+                                StringAssert.Matches(headerText, expectedRegex, $"The header did not match the expected pattern {expectedPattern}");
+                            }
+                            else
+                            {
+                                string expected = AllPageTree.allElements[subelementId][3] == "" ? subelement : AllPageTree.allElements[subelementId][3];
+                                Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found.");
+                            }
 
                             // Perform verifications or interactions on the element page
                             bool isElementPageVisible = await _AllPageTree.IsElementPageVisibleAsync(elementId);

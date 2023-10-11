@@ -1,4 +1,4 @@
-﻿using System.Xml.Linq;
+﻿using System.Text.RegularExpressions;
 
 namespace OrangeHRMTest.Pages
 {
@@ -20,7 +20,7 @@ namespace OrangeHRMTest.Pages
         //     1st element is the parent node's id
         //     2nd element is the node's name
         //     3rd element is the type of heading. If it is "" then "h6" is used
-        //     4th element is the heading text. If it is "" then the node's name is used
+        //     4th element is the heading text. If it is "" then the node's name is used. If it's of the form "/.../" it's treated as a regular expression
         public static Dictionary<string, string[]> allElements = new Dictionary<string, string[]>() {
             { "01", new string[] { "00", "Admin" } },
                 { "02", new string[] { "01", "User Management " } },
@@ -85,7 +85,7 @@ namespace OrangeHRMTest.Pages
                     { "61", new string[] { "59", "Employee Timesheets", "", "Select Employee" } },
                 { "62", new string[] { "58", "Attendance " } },
                     { "63", new string[] { "62", "My Records", "h5", "My Attendance Records" } },
-                    { "64", new string[] { "62", "Punch In/Out", "", "Punch In" } },
+                    { "64", new string[] { "62", "Punch In/Out", "", "/Punch (In|Out)/" } },
                     { "65", new string[] { "62", "Employee Records", "h5", "Employee Attendance Records" } },
                     { "66", new string[] { "62", "Configuration", "", "Attendance Configuration" } },
                 { "67", new string[] { "58", "Reports " } },
@@ -152,7 +152,15 @@ namespace OrangeHRMTest.Pages
             if (allElements.ContainsKey(subelementId) && allElements[subelementId].Length == 4)
             {
                 string[] details = allElements[subelementId];
-                returnValue = $"{(details[2] == "" ? "h6" : details[2])}.oxd-text:has-text('{(details[3] == "" ? details[1] : details[3])}')";
+                Regex isRegex = new Regex("^/(.*)/$");
+                if (isRegex.IsMatch(details[3]))
+                {
+                    returnValue = $"{(details[2] == "" ? "h6" : details[2])}.oxd-text:text-matches('{isRegex.Replace(details[3], "$1")}')";
+                }
+                else
+                {
+                    returnValue = $"{(details[2] == "" ? "h6" : details[2])}.oxd-text:has-text('{(details[3] == "" ? details[1] : details[3])}')";
+                }
             }
             return returnValue;
         }
