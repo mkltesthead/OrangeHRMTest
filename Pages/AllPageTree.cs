@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace OrangeHRMTest.Pages
 {
@@ -85,7 +86,7 @@ namespace OrangeHRMTest.Pages
                     { "61", new string[] { "59", "Employee Timesheets", "", "Select Employee" } },
                 { "62", new string[] { "58", "Attendance " } },
                     { "63", new string[] { "62", "My Records", "h5", "My Attendance Records" } },
-                    { "64", new string[] { "62", "Punch In/Out", "", "Punch (In|Out)" } },
+                    { "64", new string[] { "62", "Punch In/Out", "", "/Punch (In|Out)/" } },
                     { "65", new string[] { "62", "Employee Records", "h5", "Employee Attendance Records" } },
                     { "66", new string[] { "62", "Configuration", "", "Attendance Configuration" } },
                 { "67", new string[] { "58", "Reports " } },
@@ -152,8 +153,15 @@ namespace OrangeHRMTest.Pages
             if (allElements.ContainsKey(subelementId) && allElements[subelementId].Length == 4)
             {
                 string[] details = allElements[subelementId];
-                //returnValue = $"{(details[2] == "" ? "h6" : details[2])}.oxd-text:has-text('{(details[3] == "" ? details[1] : details[3])}')";
-                returnValue = $"{(details[2] == "" ? "h6" : details[2])}.oxd-text:text-matches('{(details[3] == "" ? details[1] : details[3])}')";
+                Regex isRegex = new Regex("^/(.*)/$");
+                if (isRegex.IsMatch(details[3]))
+                {
+                    returnValue = $"{(details[2] == "" ? "h6" : details[2])}.oxd-text:text-matches('{isRegex.Replace(details[3], "$1")}')";
+                }
+                else
+                {
+                    returnValue = $"{(details[2] == "" ? "h6" : details[2])}.oxd-text:has-text('{(details[3] == "" ? details[1] : details[3])}')";
+                }
             }
             return returnValue;
         }
