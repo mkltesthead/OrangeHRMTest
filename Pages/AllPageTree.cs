@@ -20,7 +20,7 @@ namespace OrangeHRMTest.Pages
         //     1st element is the parent node's id
         //     2nd element is the node's name
         //     3rd element is the type of heading. If it is "" then "h6" is used
-        //     4th element is the heading text. If it is "" then the node's name is used
+        //     4th element is the heading text. If it is "" then the node's name is used. If it's of the form "/.../" it's treated as a regular expression
         public static Dictionary<string, string[]> allElements = new Dictionary<string, string[]>() {
             { "01", new string[] { "00", "Admin" } },
                 { "02", new string[] { "01", "User Management " } },
