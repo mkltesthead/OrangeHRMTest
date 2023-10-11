@@ -48,14 +48,14 @@
         }
 
         [TestMethod]
-        [TestCategory("Ignore")]
+        [Ignore]
         public async Task TestSystemUsersFunctionality1()
         {
             // Your test steps for a specific functionality on the SystemUsers page
         }
 
         [TestMethod]
-        [TestCategory("Ignore")]
+        [Ignore]
         public async Task TestSystemUsersFunctionality2()
         {
             // Your test steps for another functionality on the SystemUsers page

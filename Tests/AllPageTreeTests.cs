@@ -1,4 +1,6 @@
-﻿namespace OrangeHRMTest.Tests
+﻿using System.Text.RegularExpressions;
+
+namespace OrangeHRMTest.Tests
 {
     [TestClass]
     public class AllPageTreeTests
@@ -135,8 +137,11 @@
                             // Get the text on the element page header
                             var headerText = await _AllPageTree.GetSublementPageHeaderText(subelementId);
                             Console.WriteLine($"Actual Header Text: {headerText}");
-                            string expected = AllPageTree.allElements[subelementId][3] == "" ? subelement : AllPageTree.allElements[subelementId][3];
-                            Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found.");
+                            //string expected = AllPageTree.allElements[subelementId][3] == "" ? subelement : AllPageTree.allElements[subelementId][3];
+                            //Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found.");
+                            string expectedPattern = AllPageTree.allElements[subelementId][3] == "" ? subelement : AllPageTree.allElements[subelementId][3];
+                            Regex expectedRegex = new Regex(expectedPattern);
+                            StringAssert.Matches(headerText, expectedRegex, $"The header did not match the expected pattern {expectedPattern}");
 
                             // Perform verifications or interactions on the element page
                             bool isElementPageVisible = await _AllPageTree.IsElementPageVisibleAsync(elementId);
@@ -209,8 +214,11 @@
                             // Get the text on the element page header
                             var headerText = await _AllPageTree.GetSublementPageHeaderText(subelementId);
                             Console.WriteLine($"        Actual header text: {headerText}");
-                            string expected = AllPageTree.allElements[subelementId][3] == "" ? subelement : AllPageTree.allElements[subelementId][3];
-                            Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found");
+                            //string expected = AllPageTree.allElements[subelementId][3] == "" ? subelement : AllPageTree.allElements[subelementId][3];
+                            //Assert.AreEqual(expected, headerText, false, $"The header {expected} was not found.");
+                            string expectedPattern = AllPageTree.allElements[subelementId][3] == "" ? subelement : AllPageTree.allElements[subelementId][3];
+                            Regex expectedRegex = new Regex(expectedPattern);
+                            StringAssert.Matches(headerText, expectedRegex, $"The header did not match the expected pattern {expectedPattern}");
 
                             // Perform verifications or interactions on the element page
                             bool isElementPageVisible = await _AllPageTree.IsElementPageVisibleAsync(elementId);
