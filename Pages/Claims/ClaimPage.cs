@@ -1,4 +1,4 @@
-﻿namespace OrangeHRMTest.Pages
+﻿namespace OrangeHRMTest.Pages.Claims
 {
     public class ClaimPage
     {
@@ -37,7 +37,7 @@
             string returnValue = "";
             if (elements.ContainsKey(element) && elements[element] is not Array)
             {
-                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>) elements[element];
+                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)elements[element];
                 returnValue = subelements.ContainsKey(subelement) ? $"a[class='oxd-topbar-body-nav-tab-link']:text('{subelement}')" : "";
             }
             return returnValue;
@@ -48,7 +48,7 @@
             string returnValue = "";
             if (elements.ContainsKey(element) && elements[element] is not Array)
             {
-                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>) elements[element];
+                Dictionary<string, string[]> subelements = (Dictionary<string, string[]>)elements[element];
                 if (subelements.ContainsKey(subelement))
                 {
                     string[] details = subelements[subelement];

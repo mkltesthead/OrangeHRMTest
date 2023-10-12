@@ -1,4 +1,4 @@
-﻿using OrangeHRMTest.Pages;
+﻿using OrangeHRMTest.Pages.Claims;
 
 namespace OrangeHRMTest.Tests
 {
@@ -11,13 +11,14 @@ namespace OrangeHRMTest.Tests
         private LoginPage? _loginPage; // POM created for Login Page
         private NavigationPanelPage? _navigationPanelPage; // POM created for the NavigationPanel
         private ClaimPage? _ClaimPage; // POM created for the Claim Page
+        private SubmitClaimPage? _SubmitClaimPage;//POM created for the Submit Claim Page
         [TestInitialize]
         public async Task Setup()
         {
             // Initialize browser, context, and page
             var playwright = await Playwright.CreateAsync();
 
-            bool demo = false;
+            bool demo = true;
             BrowserTypeLaunchOptions options = new BrowserTypeLaunchOptions();
             if (demo)
             {
@@ -135,6 +136,29 @@ namespace OrangeHRMTest.Tests
             {
                 Console.WriteLine($"The element {element} does not exist on the Admin page.");
             }
+        }
+
+        [TestMethod]
+        [TestCategory("PositiveTest")]
+        [TestCategory("Claim Page Elements")]
+
+        public async Task TestSubmitClaim()
+        {
+            _navigationPanelPage = new NavigationPanelPage(_page);
+            await _navigationPanelPage.GoToPageAsync("Claim");
+
+            // Create a ClaimPage object
+            _ClaimPage = new ClaimPage(_page);
+            _SubmitClaimPage = new SubmitClaimPage(_page);
+            await _ClaimPage.GoToElementPageAsync("Submit Claim");
+            await _SubmitClaimPage.FillOutSubmitClaimDetailsAsync("Travel Allowance", "Afghanistan Afghani", "This is test claim");
+            await _SubmitClaimPage.SubmitFormAsync();
+
+            //await _SubmitClaimPage.ValidateClaimCreated();
+
+
+
+
         }
     }
 }
