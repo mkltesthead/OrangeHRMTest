@@ -135,5 +135,57 @@ namespace OrangeHRMTest.Tests
                 Console.WriteLine($"The element {element} does not exist on the Admin page.");
             }
         }
+        [TestMethod]
+        [TestCategory("PositiveTest")]
+        [TestCategory("PIM Page Elements")]
+        public async Task TestAddEmployee()
+        {
+            _navigationPanelPage = new NavigationPanelPage(_page);
+            await _navigationPanelPage.GoToPageAsync("PIM");
+
+            _PIMPage = new PIMPage(_page);
+            await _PIMPage.GoToElementPageAsync("Add Employee");
+            AddEmployeePage addEmployeePage = new AddEmployeePage(_page);
+            await addEmployeePage.FillOutEmployeeDetailsAsync("mohit", "ahuja");
+            await addEmployeePage.SubmitFormAsync();
+        }
+
+        [TestMethod]
+        [TestCategory("PositiveTest")]
+        [TestCategory("PIM Page Elements")]
+        public async Task TestUpdateEmployee()
+        {
+            _navigationPanelPage = new NavigationPanelPage(_page);
+            await _navigationPanelPage.GoToPageAsync("PIM");
+
+            _PIMPage = new PIMPage(_page);
+
+            await _PIMPage.GoToElementPageAsync("Employee List");
+            AddEmployeePage addEmployeePage = new AddEmployeePage(_page);
+            await addEmployeePage.UpdateEmployeeDetailsAsync("mohit");
+            await addEmployeePage.SubmitFormAsync();
+            await _page.GetByRole(AriaRole.Button, new() { Name = "" }).ClickAsync();
+            await _page.GetByRole(AriaRole.Button).Nth(1).ClickAsync();
+            await addEmployeePage.FillOutEditEmployeeDetailsAsync("mohitA");
+        }
+
+        [TestMethod]
+        [TestCategory("PositiveTest")]
+        [TestCategory("PIM Page Elements")]
+        public async Task TestDeleteEmployee()
+        {
+            _navigationPanelPage = new NavigationPanelPage(_page);
+            await _navigationPanelPage.GoToPageAsync("PIM");
+
+            _PIMPage = new PIMPage(_page);
+            await _PIMPage.GoToElementPageAsync("Employee List");
+            AddEmployeePage addEmployeePage = new AddEmployeePage(_page);
+            await addEmployeePage.UpdateEmployeeDetailsAsync("mohit");
+            await addEmployeePage.SubmitFormAsync();
+            await addEmployeePage.DeleteButtonAsync();
+            await _page.GetByRole(AriaRole.Button, new() { Name = " Yes, Delete" }).ClickAsync();
+        }
+
+
     }
 }
