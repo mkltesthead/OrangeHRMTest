@@ -10,8 +10,8 @@
         }
 
         // Element locators
-        private string UsernameFieldSelector => "[placeholder='Username']";
-        private string PasswordFieldSelector => "[placeholder='Password']";
+        private string UsernameFieldSelector => "[placeholder='username']";
+        private string PasswordFieldSelector => "[placeholder='password']";
         private string LoginButtonSelector => ".oxd-button.orangehrm-login-button:text('Login')";
         private string DashboardHeadingSelector => "h6.oxd-text.oxd-text--h6.oxd-topbar-header-breadcrumb-module:text('Dashboard')";
         private string InvalidCredentialsMessageSelector => "p.oxd-text.oxd-text--p.oxd-alert-content-text:text('Invalid credentials')";
