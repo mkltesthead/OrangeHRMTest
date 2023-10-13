@@ -1,4 +1,5 @@
 ﻿using OrangeHRMTest.Pages;
+using OrangeHRMTest.Pages.PIM;
 
 namespace OrangeHRMTest.Tests
 {
@@ -18,7 +19,7 @@ namespace OrangeHRMTest.Tests
             // Initialize browser, context, and page
             var playwright = await Playwright.CreateAsync();
 
-            bool demo = false;
+            bool demo = true;
             BrowserTypeLaunchOptions options = new BrowserTypeLaunchOptions();
             if (demo)
             {
@@ -138,52 +139,63 @@ namespace OrangeHRMTest.Tests
         [TestMethod]
         [TestCategory("PositiveTest")]
         [TestCategory("PIM Page Elements")]
-        public async Task TestAddEmployee()
+        public async Task OperationsOnPIMPage()
         {
             _navigationPanelPage = new NavigationPanelPage(_page);
             await _navigationPanelPage.GoToPageAsync("PIM");
 
             _PIMPage = new PIMPage(_page);
+
+            //Navigate to Add Employee
             await _PIMPage.GoToElementPageAsync("Add Employee");
-            AddEmployeePage addEmployeePage = new AddEmployeePage(_page);
-            await addEmployeePage.FillOutEmployeeDetailsAsync("mohit", "ahuja");
-            await addEmployeePage.SubmitFormAsync();
-        }
+            
+            //Adding Employee on PIMPage
+            await _page.GetByPlaceholder("First name").ClickAsync();
+            await _page.GetByPlaceholder("First name").FillAsync("mohit");
+            await _page.GetByPlaceholder("Last Name").ClickAsync();
+            await _page.GetByPlaceholder("Last Name").FillAsync("ahuja");
+            await _page.GetByRole(AriaRole.Button, new() { Name = "Save" }).ClickAsync();
 
-        [TestMethod]
-        [TestCategory("PositiveTest")]
-        [TestCategory("PIM Page Elements")]
-        public async Task TestUpdateEmployee()
-        {
-            _navigationPanelPage = new NavigationPanelPage(_page);
-            await _navigationPanelPage.GoToPageAsync("PIM");
+            //Verify employee is added
+            await _page.GetByRole(AriaRole.Heading, new() { Name = "mohit ahuja" }).ClickAsync();
 
-            _PIMPage = new PIMPage(_page);
+            //Created object for AddEmployeePage
+           AddEmployeePage addEmployeePage = new AddEmployeePage(_page);
 
-            await _PIMPage.GoToElementPageAsync("Employee List");
-            AddEmployeePage addEmployeePage = new AddEmployeePage(_page);
-            await addEmployeePage.UpdateEmployeeDetailsAsync("mohit");
-            await addEmployeePage.SubmitFormAsync();
+            //Navigate to Employee List
+             await _page.GetByRole(AriaRole.Link, new() { Name = "Employee List" }).ClickAsync();
+            
+            //Search the record added
+            await _page.GetByPlaceholder("Type for hints...").First.ClickAsync();
+            await _page.GetByPlaceholder("Type for hints...").First.FillAsync("mohit");
+            await _page.GetByRole(AriaRole.Option, new() { Name = "mohit ahuja" }).ClickAsync();
+            await _page.GetByRole(AriaRole.Button, new() { Name = "Search" }).ClickAsync();
+
+            //Update the first name of the record and submit
             await _page.GetByRole(AriaRole.Button, new() { Name = "" }).ClickAsync();
-            await _page.GetByRole(AriaRole.Button).Nth(1).ClickAsync();
-            await addEmployeePage.FillOutEditEmployeeDetailsAsync("mohitA");
-        }
-
-        [TestMethod]
-        [TestCategory("PositiveTest")]
-        [TestCategory("PIM Page Elements")]
-        public async Task TestDeleteEmployee()
-        {
-            _navigationPanelPage = new NavigationPanelPage(_page);
-            await _navigationPanelPage.GoToPageAsync("PIM");
-
-            _PIMPage = new PIMPage(_page);
-            await _PIMPage.GoToElementPageAsync("Employee List");
-            AddEmployeePage addEmployeePage = new AddEmployeePage(_page);
-            await addEmployeePage.UpdateEmployeeDetailsAsync("mohit");
+            await _page.GetByPlaceholder("First name").ClickAsync();
+            await _page.GetByPlaceholder("First name").FillAsync("mohittest");
             await addEmployeePage.SubmitFormAsync();
-            await addEmployeePage.DeleteButtonAsync();
+
+            //Navigate to Employee List and search for the updated record
+            await _page.GetByRole(AriaRole.Link, new() { Name = "Employee List" }).ClickAsync();
+            await _page.GetByPlaceholder("Type for hints...").First.ClickAsync();
+            await _page.GetByPlaceholder("Type for hints...").First.FillAsync("mohittest");
+            await _page.GetByText("mohittest ahuja", new() { Exact = true }).ClickAsync();
+            await _page.GetByRole(AriaRole.Button, new() { Name = "Search" }).ClickAsync();
+
+            //Press the delete button
+            await _page.GetByRole(AriaRole.Button, new() { Name = "" }).ClickAsync();
             await _page.GetByRole(AriaRole.Button, new() { Name = " Yes, Delete" }).ClickAsync();
+
+            //Again search for the record
+            await _page.GetByRole(AriaRole.Link, new() { Name = "Employee List" }).ClickAsync();
+            await _page.GetByPlaceholder("Type for hints...").First.ClickAsync();
+            await _page.GetByPlaceholder("Type for hints...").First.FillAsync("mohittest");
+            await _page.GetByRole(AriaRole.Button, new() { Name = "Search" }).ClickAsync();
+
+            //No records found
+            await _page.Locator("span").Filter(new() { HasText = "No Records Found" }).ClickAsync();
         }
 
 
